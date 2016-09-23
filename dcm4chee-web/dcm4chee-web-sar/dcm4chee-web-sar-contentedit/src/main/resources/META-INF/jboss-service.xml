@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server PUBLIC "-//JBoss//DTD MBean Service 4.2//EN" "http://www.jboss.org/j2ee/dtd/jboss-service_4_2.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<server>
+	<mbean code="org.dcm4chee.web.service.contentedit.ContentEditService" 
+         name="dcm4chee.web:service=ContentEditService"
+         xmbean-dd="resource:META-INF/xmdesc/contentedit-xmbean.xml">
+
+    <depends optional-attribute-name="RejectionNoteServiceName">dcm4chee.web:service=RejectionNoteSCU</depends>
+    <depends optional-attribute-name="IANScuServiceName">dcm4chee.web:service=IANSCU</depends>
+    <depends optional-attribute-name="MoveScuServiceName">dcm4chee.web:service=MoveScu</depends>
+    <depends optional-attribute-name="TemplatesServiceName">dcm4chee.archive:service=Templates</depends>
+    <depends optional-attribute-name="StoreScpServiceName">dcm4chee.web:service=StoreBridge</depends>
+    <depends optional-attribute-name="AttributesModificationScuServiceName">dcm4chee.web:service=AttributesModificationSCU</depends>
+    <depends optional-attribute-name="QRServiceName">dcm4chee.archive:service=QueryRetrieveScp</depends>
+    <depends optional-attribute-name="ArchiveIANScuServicename">dcm4chee.archive:service=IANScu</depends>
+  </mbean>
+</server>

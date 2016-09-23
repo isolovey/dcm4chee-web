@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision: $ $Date: $ -->
+<mbean>
+      <description><![CDATA[<b>Bridge to StoreScp service for file import.(recover from trash and 'move entities'</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.store.bridge.StoreBridge</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>StoreBridge</name>
+    </constructor>
+      
+   <attribute access="read-write"
+      getMethod="getStoreScpServiceName"
+      setMethod="setStoreScpServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>StoreScpServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Import Dicom files with given header.
+      		]]> </description>
+      <name>importFile</name>
+      <parameter>
+        <description>File Import Order containing file references and dicom header attributes</description>
+        <name>file</name>
+        <type>org.dcm4chee.web.service.common.FileImportOrder</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+</mbean>

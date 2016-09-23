@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org" style="height:100%">
+<wicket:head>
+    <title>
+        <wicket:message key="application.browser_title">Image Viewer</wicket:message>
+    </title>
+    <script src="resources/org.dcm4chee.web.war.tc.TCPanel/js/jquery-min.js" type="text/javascript"></script>
+    <script src="resources/org.dcm4chee.web.war.tc.TCPanel/js/jquery-ui-min.js" type="text/javascript"></script>
+    <script src="resources/org.dcm4chee.web.war.tc.TCPanel/js/jquery-lazyload-min.js" type="text/javascript"></script>
+    <script src="resources/org.dcm4chee.web.war.tc.TCPanel/js/tc-events.js" type="text/javascript"></script>
+    <script src="resources/org.dcm4chee.web.war.tc.TCPanel/js/tc-utils.js" type="text/javascript"></script>
+    <script src="resources/org.dcm4chee.web.war.tc.TCPanel/js/tc-view.js" type="text/javascript"></script>
+</wicket:head>
+<body style="height:98%; background-color:#161616; color:lightgray; margin:1% 1% 0; cursor:wait">
+	<p>
+		<div wicket:id="diagnosisWarning" />
+	</p>
+    <div wicket:id="tc-images-view-images-panel" style="width:100%;height:100%">
+        <div wicket:id="tc-images-view-images-panel-content" style="width:100%;height:100%"/>
+    </div>
+    <div wicket:id="tc-images-view-indicating-panel" style="width:100%;height:100%">
+        <div style="position:absolute;height:8em;margin-top:-4em;top:50%;width:100%;text-align:center">
+            <img wicket:id="tc-images-view-indicating-image"/>
+            <div wicket:id="tc-images-view-indicating-label" style="margin-top:1em;text-align:center"/>
+        </div>
+    </div>
+</body>
+</html>

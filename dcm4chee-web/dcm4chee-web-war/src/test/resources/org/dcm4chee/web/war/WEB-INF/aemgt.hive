@@ -1,0 +1,121 @@
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "LoginAllowed"
+{
+// DOC: swarm.principal.LoginAllowed
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AETestPage", "render, enable";
+};
+
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "AERead"
+{
+// DOC: swarm.principal.AERead
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AEPanel", "render, enable";
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AEListPanel", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "AEWrite"
+{
+// DOC: swarm.principal.AEWrite
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.CreateOrEditAETPage", "render, enable";
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.DicomEchoWindow$DicomEchoPage", "render, enable";
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AETestPage:aelist:dicomEchoWindow", "render, enable";
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AETestPage:aelist:dicomEchoLink", "render, enable";
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AETestPage:aelist:newAETLink", "render, enable";
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AETestPage:aelist:editAETLink", "render, enable";
+    permission ${ComponentPermission} "org.dcm4chee.web.war.ae.AETestPage:aelist:removeAETLink", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "UserManagement"
+{
+// DOC: swarm.principal.UserManagement
+	permission ${ComponentPermission} "org.dcm4chee.usr.ui.usermanagement.UserManagementPanel", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "UserRead"
+{
+// DOC: swarm.principal.UserRead
+	permission ${ComponentPermission} "org.dcm4chee.usr.ui.usermanagement.user.UserListPanel", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:userlist:changeRoleAssignmentCheckbox", "render";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "UserWrite" 
+{
+// DOC: swarm.principal.UserWrite
+	permission ${ComponentPermission} "org.dcm4chee.usr.ui.usermanagement.user.AddUserPage", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:userlist:newUserLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:userlist:changePasswordLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:userlist:removeUserLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:userlist:changeRoleAssignmentCheckbox", "enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "RoleRead"
+{
+// DOC: swarm.principal.RoleRead
+	permission ${ComponentPermission} "org.dcm4chee.usr.ui.usermanagement.role.RoleListPanel", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:rolelist:changePrincipalAssignmentCheckbox", "render";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "RoleWrite"
+{
+// DOC: swarm.principal.RoleWrite
+	permission ${ComponentPermission} "org.dcm4chee.usr.ui.usermanagement.role.CreateOrEditRolePage", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:rolelist:newRoleLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:rolelist:editRoleLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:rolelist:removeRoleLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:rolelist:changePrincipalAssignmentCheckbox", "enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "Dashboard"
+{
+// DOC: swarm.principal.Dashboard
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.DashboardPanel", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "FileSystem"
+{
+// DOC: swarm.principal.FileSystem
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.filesystem.FileSystemPanel", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "ReportRead"
+{
+// DOC: swarm.principal.ReportRead
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.report.ReportPanel", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.report.ConfigureReportPage", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:report:DisplayDiagramLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:report:DisplayTableLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:report:DisplayDiagramAndTableLink", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "ReportWrite"
+{
+// DOC: swarm.principal.ReportWrite
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.report.CreateGroupPage", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.report.CreateOrEditReportPage", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:report:newGroupLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:report:CreateOrEditReportLink", "render, enable";
+	permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:report:RemoveLink", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "SystemInfo"
+{
+// DOC: swarm.principal.SystemInfo
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.systeminfo.SystemInfoPanel", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "Queue"
+{
+// DOC: swarm.principal.Queue
+	permission ${ComponentPermission} "org.dcm4chee.dashboard.ui.messaging.QueuePanel", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "MWLRead"
+{
+// DOC: swarm.principal.MWLRead
+    permission ${ComponentPermission} "org.dcm4chee.web.war.worklist.modality.ModalityWorklistPanel", "render, enable";
+};
+
+grant principal org.apache.wicket.security.hive.authorization.SimplePrincipal "MWLWrite"
+{
+// DOC: swarm.principal.MWLWrite
+    permission ${ComponentPermission} "org.dcm4chee.web.war.MainPage:mw:editMwlItem", "render, enable";
+};

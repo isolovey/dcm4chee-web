@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+		<div id="tc-view" class="tc-view ui-content">
+		    <div id="tc-view-header" class="tc-view-header">
+		        <div id="tc-view-title" class="tc-view-title">
+		          	<div id="tc-view-title-text" wicket:id="tc-view-title-text"/>
+		          	<div id="tc-view-case-navigator" wicket:id="tc-view-case-navigator">
+			          	<button id="tc-view-prev" wicket:id="tc-view-prev">
+							<img wicket:id="tc-view-prev-img" />
+						</button>
+						<span wicket:id="tc-view-casenumber"/>
+			          	<button id="tc-view-next" wicket:id="tc-view-next">
+							<img wicket:id="tc-view-next-img" />
+						</button>
+						<button id="tc-view-next-random" wicket:id="tc-view-next-random">
+							<img wicket:id="tc-view-next-random-img" />
+						</button>
+					</div>
+		        </div>
+				<div id="tc-view-options" class="tc-view-options">
+					<div>
+					    <button id="tc-solve-btn" wicket:id="tc-solve-btn">
+					    	<img wicket:id="tc-solve-img" />
+                        	<label wicket:id="tc-solve-label"></label>
+						</button>
+						<button wicket:id="webview">
+                            <img wicket:id="webviewImg" />
+                            <label wicket:id="webview-label"></label>
+                        </button>
+						<button id="tc-print-btn" wicket:id="tc-print-btn">
+							<img wicket:id="tc-print-img" />
+						</button>
+					</div>
+				</div>
+			</div>
+			<div id="tc-view-content" wicket:id="tc-view-content" class="ui-content" style="display:none">
+				<ul>
+					<li>
+					   <a href="#tabs-overview"> 
+					       <span wicket:id="tc.view.overview.tab.title"/>  
+						</a>
+					</li>
+					<li>
+					   <a href="#tabs-diagnosis"> 
+					       <span wicket:id="tc.view.diagnosis.tab.title"/> 
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-diffDiagnosis"> 
+					       <span wicket:id="tc.view.diffDiagnosis.tab.title"/>  
+						</a>
+					</li>
+					<li>
+					   <a href="#tabs-finding"> 
+					       <span wicket:id="tc.view.finding.tab.title"/> 
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-history"> 
+					       <span wicket:id="tc.view.history.tab.title"/> 
+					    </a>
+					</li>
+					<li>
+					   <a href="#tabs-discussion"> 
+					       <span wicket:id="tc.view.discussion.tab.title"/>  
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-forum"> 
+					       <span wicket:id="tc.view.forum.tab.title"/>  
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-organSystem"> 
+					       <span wicket:id="tc.view.organSystem.tab.title"/> 
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-bibliography"> 
+					       <span wicket:id="tc.view.bibliography.tab.title"></span>
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-documents"> 
+					       <span wicket:id="tc.view.documents.tab.title"></span>
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-links"> 
+					       <span wicket:id="tc.view.links.tab.title"></span>
+					   </a>
+					</li>
+					<li>
+					   <a href="#tabs-images"> 
+					       <span wicket:id="tc.view.images.tab.title"/> 
+					   </a>
+					</li>
+				</ul>
+				<div style="position:absolute; top:0; left:0; right: 0; bottom:0; padding: 0.22em;">
+					<div id="tabs-overview" class="ui-border-box" style="width:100%; height:100%">
+					    <div wicket:id="tc-view-overview" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-diagnosis" class="ui-border-box" style="width:100%; height:100%">
+					    <div wicket:id="tc-view-diagnosis" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-diffDiagnosis" class="ui-border-box" style="width:100%; height:100%">
+						<div wicket:id="tc-view-diffDiagnosis" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-finding" class="ui-border-box" style="width:100%; height:100%">
+						<div wicket:id="tc-view-finding" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-history" class="ui-border-box" style="width:100%; height:100%">
+						<div wicket:id="tc-view-history" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-discussion" class="ui-border-box" style="width:100%; height:100%">
+						<div wicket:id="tc-view-discussion" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-forum" class="ui-border-box" style="width:100%; height:100%">
+						<div wicket:id="tc-view-forum" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-organSystem" class="ui-border-box" style="width:100%; height:100%">
+						<div wicket:id="tc-view-organSystem" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-bibliography" class="ui-border-box" style="width:100%; height:100%">
+						<div wicket:id="tc-view-bibliography" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-documents"  class="ui-border-box" style="padding:0px;width:100%; height:100%">
+						<div wicket:id="tc-view-documents" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-links"  class="ui-border-box" style="padding:0px;width:100%; height:100%">
+						<div wicket:id="tc-view-links" class="tc-view-tab-container"/>
+					</div>
+					<div id="tabs-images" class="tc-view-images-tab-container-parent ui-border-box" style="padding:10px 0 0;width:100%; height:100%">
+					    <div wicket:id="tc-view-images" id="tc-view-images-tab-container" class="tc-view-tab-container"/>
+					</div>
+				</div>
+			</div>
+		    <wicket:child/>
+		</div>
+		<div wicket:id="tc-view-webviewer-selection-window" />
+	</wicket:panel> 
+</body>
+</html>

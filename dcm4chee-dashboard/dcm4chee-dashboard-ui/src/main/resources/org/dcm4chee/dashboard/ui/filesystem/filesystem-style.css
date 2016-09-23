@@ -1,0 +1,17 @@
+
+/* to make IE show dashboard FileSystemTreeTable usage diagrams correctly */
+div.filesystem div.wicket-tree-table span.junction, 
+div.filesystem div.wicket-tree-table span.junction-last, 
+div.filesystem  div.wicket-tree-table span.plus, 
+div.filesystem div.wicket-tree-table span.minus, 
+div.filesystem div.wicket-tree-table span.corner, 
+div.filesystem div.wicket-tree-table span.indent-line, 
+div.filesystem div.wicket-tree-table span.icon, 
+div.filesystem div.wicket-tree-table div.row, 
+div.filesystem div.wicket-tree-table div.row-selected, 
+div.filesystem div.wicket-tree-table div.a_, 
+div.filesystem div.wicket-tree-table span.b_, 
+div.filesystem div.wicket-tree-table span.b_ span.c_ {
+	height: 60px !important;
+	min-height: 60px !important;
+}

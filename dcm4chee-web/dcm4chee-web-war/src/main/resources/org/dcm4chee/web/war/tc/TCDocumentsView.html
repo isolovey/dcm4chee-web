@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+    	<div id="documents-file-upload" wicket:id="file-upload" style="float:left;width:30%;height:98.5%;margin-right:20px;overflow-x:hidden;overflow-y:auto;">
+			<img wicket:id="file-upload-info-img" style="margin:5px;"/>
+			<form wicket:id="file-upload-form"
+				style="padding: 15px 5px 0px 5px">
+				<label wicket:id="file-upload-label" />
+				<input wicket:id="file-upload-field" type="file" class="ui-textfield"
+					style="margin-bottom: 10px;" />
+				<label wicket:id="file-upload-description-label" />
+				<textarea wicket:id="file-upload-description-text" class="ui-textarea"
+					style="width: 96%; height: 80px;">
+		    		</textarea>
+				<div style="margin-top: 20px; text-align: center;">
+					<button wicket:id="file-upload-btn" type="submit" class="button">
+						<span wicket:id="file-upload-btn-text" />
+					</button>
+				</div>
+			</form>
+    	</div>
+    	<div wicket:id="remove-doc-dialog"/>
+    	<div wicket:id="document-items" style="margin:1%;height:98%;overflow-y:auto;">
+    		<div class="document-item" wicket:id="document-item" style="position:relative;min-height:40px;padding:20px 10px 10px;overflow-y:hidden;">
+    			<a wicket:id="document-item-view-link" style="float:left; width:35px; margin-right: 10px">
+    				<img wicket:id="document-item-image"/>
+    			</a>
+                <div wicket:id="document-item-text" style="margin-left: 45px; overflow-y:auto;"/>
+                <div wicket:id="document-item-actions" style="display:none;position:absolute;right:10px;top:10px;">
+		    		<a wicket:id="document-item-download-btn" style="display:inline-block">
+		            	<img wicket:id="document-item-download-image" />
+		            </a>
+		    		<a wicket:id="document-item-remove-btn" style="display:inline-block">
+		            	<img wicket:id="document-item-remove-image" />
+		            </a>
+	            </div>
+    		</div>
+    	</div>
+	</wicket:panel>
+</body>
+</html>

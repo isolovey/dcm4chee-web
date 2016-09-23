@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+	<wicket:panel>
+		<div wicket:id="role-window" />
+        <div wicket:id="webrole-window" />
+        <div wicket:id="aetrole-window" />
+		<div wicket:id="confirmation-window" />
+		<div style="clear: both; margin-top: 5px;" />
+		<button wicket:id="toggle-role-form-link">
+			<img wicket:id="toggle-role-form-image" alt="New role" />
+			<span wicket:id="rolelist.add-role-form.title" />
+		</button>
+		<table rules="groups" class="content-table" style="clear: both; margin-top: 9px;">
+		  <thead>
+		    <tr>
+				<th style="width: 10%">
+					<wicket:message key="rolelist.table.rolename.title">
+						[Rolename]
+					</wicket:message>
+				</th>
+                <th></th>
+                <th></th>
+                <th wicket:id="group-header-cells" style="width: 5%; text-align: center;">
+                    <div wicket:id="groupname" />
+                </th>
+                <th style="width: 100%"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr wicket:id="role-rows">
+				<td wicket:id="rolename">
+		      		[Rolename]
+		      	</td>
+                <td>
+                    <a wicket:id="edit-role-link" href="#">
+                        <img wicket:id="rolelist.edit.image" />
+                    </a>
+                </td>
+                <td>
+                    <a wicket:id="remove-role-link" href="#">
+                        <img wicket:id="rolelist.delete.image" />
+                    </a>
+                </td>
+                <td wicket:id="webrole-cell" style="text-align: center;">
+	                <a wicket:id="webrole-link" href="#">
+	                    <img wicket:id="rolelist.webrole.image" />
+	                </a>
+                </td>
+                <td wicket:id="dicomrole-cell" style="text-align: center;">
+                    <input wicket:id="dicomrole-checkbox" type="checkbox" />
+                </td>
+                <td wicket:id="aetrole-cell" style="text-align: center;">
+                    <a wicket:id="aetrole-link" href="#">
+                        <img wicket:id="rolelist.aetrole.image" />
+                    </a>
+                </td>
+                <td wicket:id="group-content-cells" style="text-align: center;">
+                    <input wicket:id="group-checkbox" type="checkbox" />
+                </td>
+                <td></td>
+		    </tr>
+		  </tbody>
+		</table>
+		</wicket:panel>
+	</body>
+</html>	

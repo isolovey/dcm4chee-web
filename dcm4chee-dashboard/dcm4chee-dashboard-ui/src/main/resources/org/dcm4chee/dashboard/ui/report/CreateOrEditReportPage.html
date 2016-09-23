@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+    	<div class="msgWindow">
+    		<div wicket:id="create-page-title" class="edit-title">
+				<wicket:message key="dashboard.report.createoredit.create.title" />
+			</div>
+    		<div wicket:id="edit-page-title" class="edit-title">
+				<wicket:message key="dashboard.report.createoredit.edit.title" />
+			</div>
+			<form wicket:id="create-or-edit-report-form">
+				 <div class="edit-content">
+				 	<div class="edit-table-panel">
+	          			<div class="edit-table-row">
+	          				<div class="edit-desc">
+								<wicket:message key="dashboard.report.createoredit.form.title.title" />
+							</div>
+							<input wicket:id="dashboard.report.createoredit.form.title.input" class="edit-value" type="text" size="15" />
+						</div>
+	          			<div class="edit-table-row">
+	          				<div class="edit-desc">
+								<wicket:message key="dashboard.report.createoredit.form.datasource.dropdown.title" />
+							</div>
+							<select wicket:id="report-datasource-dropdown-choice" size="1" class="edit-value"></select>
+						</div>
+	          			<div class="edit-table-row" style="height: 200px;">
+	          				<div class="edit-desc">
+								<wicket:message key="dashboard.report.createoredit.form.statement.title" />
+							</div>
+							<textarea wicket:id="dashboard.report.createoredit.form.statement.input" class="edit-value">
+							</textarea>
+						</div>
+	          			<div class="edit-table-row">
+	          				<div class="edit-desc">
+	          				</div>
+							<input wicket:id="statement-test-submit" type="submit" wicket:message="value:dashboard.report.createoredit.form.statement.test" style="float: left; text-align: left; vertical-align: middle; margin: 2px 6px 0px;" />
+						</div>
+	          			<div class="edit-table-row">
+	          				<div class="edit-desc">
+								<wicket:message key="dashboard.report.createoredit.form.diagram.dropdown.title" />
+							</div>
+							<select wicket:id="report-diagram-dropdown-choice" size="1" class="edit-value"></select>
+						</div>
+	          			<div class="edit-table-row">
+	          				<div class="edit-desc">
+								<wicket:message key="dashboard.report.createoredit.form.table.option.title" />
+							</div>
+							<input wicket:id="report-table-checkbox" type="checkbox" class="edit-value" />
+						</div>
+					</div>
+					<div class="edit-buttons">
+						<input wicket:id="form-submit" type="submit" wicket:message="value:dashboard.report.createoredit.form.submit" />
+					</div>
+        		</div>
+			</form>
+        </div>
+		<div class="dashboard-report" style="clear: both; margin-top: 9px; height: 50px; text-align: center; vertical-align: middle;">
+			<div wicket:id="result-message">
+				[Result message]
+			</div>
+		</div>
+		<div class="dashboard-report" style="clear: both; margin-top: 9px; height: 50px; text-align: center; vertical-align: middle;">
+			<wicket:message key="dashboard.report.createoredit.documentation">
+           		[Documentation]
+			</wicket:message>
+		</div>
+ 	</body>
+</html>

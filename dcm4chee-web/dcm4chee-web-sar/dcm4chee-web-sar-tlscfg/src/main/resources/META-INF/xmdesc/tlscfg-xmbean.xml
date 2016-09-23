@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>DICOM TLS Configuration Service</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.tlscfg.TlsCfgService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>TlsCfgService</name>
+    </constructor>
+      
+   <attribute access="read-write"
+      getMethod="getKeyStoreURL"
+      setMethod="setKeyStoreURL">
+      <description>URL of key store containing key used in SSL handshake,
+         when running in TLS mode.
+      </description>
+      <name>KeyStoreURL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="resource:certificates/test_sys_1.p12" />
+      </descriptors>
+   </attribute>
+   <attribute access="write-only"
+      setMethod="setKeyStorePassword">
+      <description>The password for access to key store,
+      specified by attribute KeyStoreURL.
+      </description>
+      <name>KeyStorePassword</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="secret" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getKeyPassword"
+      setMethod="setKeyPassword">
+      <description>The password for the private key,
+      Set NONE to use KeyStorePassword. Note: return ****** for not NONE values!
+      </description>
+      <name>KeyPassword</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getKeyStoreType"
+      setMethod="setKeyStoreType">
+      <description>Type of KeyStore for private key.
+      </description>
+      <name>KeyStoreType</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="PKCS12" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTrustStoreURL"
+      setMethod="setTrustStoreURL">
+      <description>URL of trust store containing accepted certificates,
+         when running in TLS mode.
+      </description>
+      <name>TrustStoreURL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="resource:certificates/mesa_certs.jks" />
+      </descriptors>
+   </attribute>
+   <attribute access="write-only"
+      setMethod="setTrustStorePassword">
+      <description>The password for access to trust store,
+      specified by attribute TrustStoreURL.
+      </description>
+      <name>TrustStorePassword</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="secret" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTrustStoreType"
+      setMethod="setTrustStoreType">
+      <description>Type of KeyStore for trusted public keys.
+      </description>
+      <name>TrustStoreType</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="JKS" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTlsProtocol"
+      setMethod="setTlsProtocol">
+      <!-- Security -->     
+      <description><![CDATA[Comma separated list of protocol versions enabled
+      for use on this connection. Possible values: TLSv1,SSLv3,SSLv2Hello]]>
+      </description>
+      <name>TLSProtocols</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="TLSv1,SSLv3" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isNeedClientAuth"
+      setMethod="setNeedClientAuth">
+      <!-- Security -->     
+      <description><![CDATA[Set to <tt>true</tt> if client authentication is
+      required, or <tt>false</tt> if no client authentication is desired.]]>
+      </description>
+      <name>NeedClientAuthentication</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Initialize device and remote connection with TLS configuration and given cipher suites.
+      		]]> </description>
+      <name>initTLS</name>
+      <parameter>
+        <description>Remote Connection Object</description>
+        <name>remoteConn</name>
+        <type>org.dcm4che2.net.NetworkConnection</type>
+      </parameter>
+      <parameter>
+        <description>Device Object to initialize for TLS</description>
+        <name>device</name>
+        <type>org.dcm4che2.net.Device</type>
+      </parameter>
+      <parameter>
+        <description>List of Cipher Suites</description>
+        <name>ciphers</name>
+        <type>[Ljava.lang.String;</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+   
+   <operation impact="ACTION">
+      <description><![CDATA[ Create and initialize socket with TLS configuration and given cipher suites.
+      		]]> </description>
+      <name>initSocket</name>
+      <parameter>
+        <description>Hostname to connect to</description>
+        <name>host</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Port</description>
+        <name>port</name>
+        <type>int</type>
+      </parameter>
+      <parameter>
+        <description>List of Cipher Suites</description>
+        <name>ciphers</name>
+        <type>[Ljava.lang.String;</type>
+      </parameter>
+      <parameter>
+        <description>Address to which the connection is bind to</description>
+        <name>bindAddress</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>connectionTimeout</description>
+        <name>connectionTimeout</name>
+        <type>int</type>
+      </parameter>
+      <return-type>java.net.Socket</return-type>
+   </operation>
+
+</mbean>

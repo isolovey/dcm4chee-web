@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>DICOM Echo Service</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.echo.EchoService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>EchoService</name>
+    </constructor>
+      
+   <attribute access="read-write"
+      getMethod="getCallingAET"
+      setMethod="setCallingAET">
+      <description>Calling AE title of the Move SCU.
+      </description>
+      <name>CallingAETitle</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE" />
+      </descriptors>
+   </attribute>
+ 
+   <attribute access="read-write"
+      getMethod="isBindToCallingAET"
+      setMethod="setBindToCallingAET">
+      <description>Bind socket to address of CallingAET.
+      </description>
+      <name>BindToCallingAET</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+     getMethod="getConnectTimeout"
+     setMethod="setConnectTimeout">
+      <description>Connection timeout in ms. 0 = no timeout</description>
+      <name>ConnectTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="0"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getAcceptTimeout"
+     setMethod="setAcceptTimeout">
+      <description>A-Associate accept timeout in milliseconds. 0 = no timeout.</description>
+      <name>AcceptTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="10000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write" 
+     getMethod="getDimseRspTimeout"
+     setMethod="setDimseRspTimeout">
+      <description>Timeout in milliseconds for receiving DIMSE-RSP. 0 = no timeout.
+      </description>
+      <name>DimseRspTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="60000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getReleaseTimeout"
+     setMethod="setReleaseTimeout">
+      <description>Timeout in ms for receiving A-RELEASE-RP.
+      </description>
+      <name>ReleaseTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="5000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getSocketCloseDelay"
+     setMethod="setSocketCloseDelay">
+      <description>Delay in ms for Socket close after sending A-ABORT.
+      </description>
+      <name>SocketCloseDelay</name>
+      <type>int</type>
+      <descriptors>
+         <value value="50"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMaxPDULengthReceive"
+      setMethod="setMaxPDULengthReceive">
+      <description>Maximum protocol data unit (PDU) package length for receiving PDUs.
+      </description>
+      <name>MaximumPDULengthReceive</name>
+      <type>int</type>
+      <descriptors>
+         <value value="16352"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMaxOpsInvoked"
+      setMethod="setMaxOpsInvoked">
+      <description>Maximum number of outstanding operations this MOVE SCU will invoke on one Association. 0 = no limit
+      </description>
+      <name>getMaxOpsInvoked</name>
+      <type>int</type>
+      <descriptors>
+         <value value="0"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTcpNoDelay"
+      setMethod="setTcpNoDelay">
+      <description>Send packets as quickly as possible (Disable Nagle's algorithmn).
+      </description>
+      <name>TcpNoDelay</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write"
+      getMethod="getTlsCfgServiceName"
+      setMethod="setTlsCfgServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>TlsCfgServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+
+   <attribute access="read-write"
+     getMethod="getPingTimeout"
+     setMethod="setPingTimeout">
+      <description>ICMP Ping Timeout in ms. 0 = no timeout</description>
+      <name>PingTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="1000"/>
+      </descriptors>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Perform a DICOM Echo to given Application Entity.
+      		]]> </description>
+      <name>echo</name>
+      <parameter>
+        <description>Application Entity Title</description>
+        <name>aet</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>boolean</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Checks if an echo request with the specified AE configuration works correctly.
+            This method is quiet (no error messages or exceptions) but return textual timing information or failure as result!
+      		]]> </description>
+      <name>echo</name>
+      <parameter>
+        <description>Application Entity</description>
+        <name>ae</name>
+        <type>org.dcm4chee.archive.entity.AE</type>
+      </parameter>
+      <parameter>
+        <description>Number of echoes to test.(All in one Association)</description>
+        <name>nrOfTests</name>
+        <type>int</type>
+      </parameter>
+      <return-type>java.lang.String</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Checks if the given host is reachable via ICMP ping or TCP Echo (port 7).
+      		]]> </description>
+      <name>ping</name>
+      <parameter>
+        <description>Hostname or IP address</description>
+        <name>hostname</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>boolean</return-type>
+   </operation>
+</mbean>

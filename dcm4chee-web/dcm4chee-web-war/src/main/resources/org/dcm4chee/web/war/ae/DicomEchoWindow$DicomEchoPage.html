@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+   		<div class="msgWindow">
+			<form wicket:id="form">
+				<br />
+				<div class="ae-table-row">
+					<span class="ae-desc" wicket:id="aetLabel">[AET]</span>
+					<input class="ae-value"	wicket:id="title" type="text" />
+					<input class="ae-value"	wicket:id="hostName" type="text" />
+					<input class="ae-value"	wicket:id="port" type="text" size="6" />
+				</div>
+				<br />
+				<div>
+					<span class="ae-ciphers" wicket:id="ciphersLabel">[Ciphers]</span>
+				</div>
+				<div class="ae-cipher-row">
+					<div class="ae-value">
+						<select wicket:id="ciphersuite1">
+							<!--  <option value="-">-</option> -->
+						</select>
+					</div>
+				</div>
+				<br />
+				<div class="ae-cipher-row">
+					<div class="ae-value">
+						<select wicket:id="ciphersuite2">
+						<!--	<option value="-">-</option> -->
+						</select>
+					</div>
+				</div>
+				<br />
+				<div class="ae-cipher-row">
+					<div class="ae-value">
+						<select wicket:id="ciphersuite3">
+							<option value="-">-</option>
+						</select>
+					</div>
+				</div>
+				<br />
+				<span class="ae-desc" wicket:id="nrOfTestsLabel">[NrOfTests]</span>
+				<input class="ae-value" wicket:id="nrOfTests" type="text" size="4" />
+				<input class="ae-echo" type="submit" wicket:id="echo" />
+				<input class="ae-echo" type="submit" wicket:id="ping" />
+				<br/>
+				<span class="ae-desc" wicket:id="echoResultLabel">[Result]</span>
+				<div class="ae-echo-result">
+					<textarea name="result" class="ae-echo-result" wicket:id="result" 
+						rows="6" cols="60">[EchoResult]</textarea>
+				</div>
+				<br />
+				<div class="ae_button">
+					<input class="ae-cancel" type="submit" wicket:id="cancel"/>
+					<input class="ae-submit" type="submit" wicket:id="save"/>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>Web3 Configuration Service</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.dashboard.service.webcfg.WebCfgService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>WebCfgService</name>
+    </constructor>
+
+   <attribute access="read-write"
+      getMethod="isManageUsers"
+      setMethod="setManageUsers">
+      <description><![CDATA[Manage users in the web application.
+      ]]></description>
+      <name>manageUsers</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWebConfigPath"
+      setMethod="setWebConfigPath">
+      <description><![CDATA[
+        Configuration Path for web specific config files.<br/>
+        A relative path name is resolved relative to archive-install-directory/server/default/.]]>
+      </description>
+      <name>WebConfigPath</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="conf/dcm4chee-web3"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWindowSizeConfig"
+      setMethod="setWindowSizeConfig">
+      <description><![CDATA[Window size configuration of modal windows.<br/>
+        Format: &lt;name&gt;:&lt;width&gt;x&lt;height&gt;<br/>
+        <dl><dt>Following window names can be used:</dt>
+        <dd>default:   default size</dd>
+        <dd>createGroup:   size of the create group window</dd>
+        <dd>reportDiagram:   size of the report diagram window</dd>
+        <dd>reportDiagramImage:   size of the diagram image</dd>
+        <dd>reportTable:   size of the report table window</dd>
+        <dd>reportDiagramandtable:   size of the window displaying both diagram image and report table</dd>
+      ]]></description>
+      <name>WindowSizeConfig</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+            default:800x600
+            createGroup:400x300
+            editReport:850x500
+            reportDiagram:1024x768
+            reportDiagramImage:800x600
+            reportTable:1024x768
+            reportDiagramandtable:1024x768
+            "/>
+      </descriptors>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   <operation impact="ACTION">
+      <description>Get window size for given window name. Return an int[] with 0..width and 1..height</description>
+      <name>getWindowSize</name>
+      <parameter>
+        <description>Name of window</description>
+        <name>name</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>[I</return-type>
+   </operation>
+
+   &defaultOperations;
+</mbean>

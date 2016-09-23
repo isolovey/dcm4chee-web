@@ -1,0 +1,9 @@
+/*
+	AE CSS
+*/
+
+.ae_echo_succeed {background: none #AAFFAA; color: black;}
+.ae_echo_pending {background: none #AAAAAA; color: black; }
+.ae_echo_failed {background: none #FF6666; color: black; }
+.ae_save_failed {background: none red; color: black; }
+.ae_ping_succeed {background: none #AAFFAA; color: black; }

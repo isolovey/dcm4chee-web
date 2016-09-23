@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server PUBLIC "-//JBoss//DTD MBean Service 4.2//EN" "http://www.jboss.org/j2ee/dtd/jboss-service_4_2.dtd">
+<server>
+  <mbean code="org.dcm4chee.dashboard.mbean.DashboardService" 
+  		 name="dcm4chee.web:service=DashboardService"
+  		 xmbean-dd="resource:META-INF/xmdesc/DashboardService-xmbean.xml">
+  </mbean>
+</server>

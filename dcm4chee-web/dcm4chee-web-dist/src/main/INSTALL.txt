@@ -1,0 +1,41 @@
+INSTALL INSTRUCTIONS FOR DCM4CHEE WEB3:
+==========================================================
+
+Precondition:
+
+Installed DCM4CHE Archive instance. Version > 2.17.0
+
+Minimum System Requirements: (same as dcm4chee archive)
+  JDK 5 or higher.
+  512 MB RAM
+  200 MB hard disk space (additional to archive storage disk space)  
+  400 MHz CPU
+
+Supported Databases: (same as dcm4chee archive)
+  PostgreSQL 8.1+
+  MySQL 4.1+
+  Oracle 9i/10g
+  SQL Server
+  DB2 8.1+
+  Firebird 2.1
+  Hypersonic SQL (Embedded in JBoss AS) - not suitable for production use!
+
+Installation Procedure:
+
+1. Extract the binary distribution package of dcm4chee-web for the database
+of your choice. Avoid using a directory that has a name that contains spaces
+as installation directory.
+
+2. Stop your DCM4CHEE archive instance.
+
+3. Move to the dcm4chee-web-3.0.3-<db>/bin directory and execute the
+install.bat or install.sh script, as appropriate for your operating
+system, with the path of your DCM4CHEE installation directory as parameter.
+
+4. Start DMC4CHEE archive
+
+5. Connect to the Web Interface at http://localhost:8080/dcm4chee-web3/
+using any Web Browser (most tested are Mozilla-Firefox and Microsoft Internet Explorer v8.x). 
+You will be prompted for user name and password. Login in using default DCM4CHEE web account 
+'admin', with password 'admin'.
+

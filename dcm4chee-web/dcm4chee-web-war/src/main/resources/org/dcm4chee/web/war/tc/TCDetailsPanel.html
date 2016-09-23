@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+        <div class="details-area-header ui-widget-header">
+            <wicket:message key="tc.details.header.title"/>
+        </div>
+        <div class="details-area-content" style="position:relative;">
+            <div wicket:id="no-details-panel" class="no-details-area">
+                <wicket:message key="tc.details.nodetails.title"/>
+            </div>
+            <div wicket:id="error-details-panel" class="error-details-area">
+                <wicket:message key="tc.details.errordetails.title"/>
+            </div>
+            <div wicket:id="details-info-panel" class="info-details-area" style="height:100%">
+                <div wicket:id="details-tabs" class="details-tabs" style="display:none;">
+                	<ul>
+						<li>
+						   <a href="#details-overview"> 
+						       <span wicket:id="tc.details.tab.info.title"/>  
+							</a>
+						</li>
+						<li>
+						   <a href="#details-diagnosis"> 
+						       <span wicket:id="tc.details.tab.diagnosis.title"/> 
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-diffDiagnosis"> 
+						       <span wicket:id="tc.details.tab.diffDiagnosis.title"/>  
+							</a>
+						</li>
+						<li>
+						   <a href="#details-finding"> 
+						       <span wicket:id="tc.details.tab.finding.title"/> 
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-history"> 
+						       <span wicket:id="tc.details.tab.history.title"/> 
+						    </a>
+						</li>
+						<li>
+						   <a href="#details-discussion"> 
+						       <span wicket:id="tc.details.tab.discussion.title"/>  
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-organSystem"> 
+						       <span wicket:id="tc.details.tab.organsystem.title"/> 
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-author"> 
+						       <span wicket:id="tc.details.tab.author.title"/> 
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-bibliography"> 
+						       <span wicket:id="tc.details.tab.bibliography.title"></span>
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-documents"> 
+						       <span wicket:id="tc.details.tab.documents.title"></span>
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-links"> 
+						       <span wicket:id="tc.details.tab.links.title"></span>
+						   </a>
+						</li>
+						<li>
+						   <a href="#details-images"> 
+						       <span wicket:id="tc.details.tab.images.title"/> 
+						   </a>
+						</li>
+					</ul>
+					<div id="details-overview">
+					    <div wicket:id="details-overview" class="tab-panel"/>
+					</div>
+					<div id="details-diagnosis">
+					    <div wicket:id="details-diagnosis" class="tab-panel"/>
+					</div>
+					<div id="details-diffDiagnosis">
+						<div wicket:id="details-diffDiagnosis" class="tab-panel"/>
+					</div>
+					<div id="details-finding">
+						<div wicket:id="details-finding" class="tab-panel"/>
+					</div>
+					<div id="details-history">
+						<div wicket:id="details-history" class="tab-panel"/>
+					</div>
+					<div id="details-discussion">
+						<div wicket:id="details-discussion" class="tab-panel"/>
+					</div>
+					<div id="details-organSystem">
+						<div wicket:id="details-organSystem" class="tab-panel"/>
+					</div>
+					<div id="details-author">
+						<div wicket:id="details-author" class="tab-panel"/>
+					</div>
+					<div id="details-bibliography">
+						<div wicket:id="details-bibliography" class="tab-panel"/>
+					</div>
+					<div id="details-documents">
+						<div wicket:id="details-documents" class="tab-panel"/>
+					</div>
+					<div id="details-links">
+						<div wicket:id="details-links" class="tab-panel"/>
+					</div>
+					<div id="details-images" class="tc-view-images-tab-container-parent">
+					    <div wicket:id="details-images" id="tc-view-images-tab-container" class="tab-panel"/>
+					</div>
+                </div>
+            </div>
+        </div>
+    </wicket:panel> 
+</body>
+</html>

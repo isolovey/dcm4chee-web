@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+    <description><![CDATA[<b>Attributes Modification SCU Service. 
+    	Send Attribute Modification Notifications to remote systems supporting private
+    	AttributesModificationNotification SOPClass (1.2.40.0.13.1.3.1.2.3.1.1) to update 
+    	Study/Series/Instance attributes for changes made in web3 (DICOM edit, move entities,..). </b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.modify.AttributesModificationScuService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>AttributesModificationScuService</name>
+    </constructor>
+      
+   <attribute access="read-write"
+      getMethod="getCallingAET"
+      setMethod="setCallingAET">
+      <description>Calling AE title of the Store SCU to send AttributesModification notifications.
+      </description>
+      <name>CallingAETitle</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getCalledAETs"
+      setMethod="setCalledAETs">
+      <description>AE title(s) of Store SCPs. Use NONE to disable this service.
+      </description>
+      <name>CalledAETitles</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getModifyingSystem"
+      setMethod="setModifyingSystem">
+      <description>Default ModifyingSystem if not explicitly given.
+      </description>
+      <name>ModifyingSystem</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE_WEB" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getReasonForTheAttributeModification"
+      setMethod="setReasonForTheAttributeModification">
+      <description>Default Reason if not explicitly given.
+      </description>
+      <name>ReasonForTheAttributeModification</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="CORRECT" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write" getMethod="getNoRetryErrorCode" setMethod="setNoRetryErrorCode">
+      <description><![CDATA[Defines particular Error Code in C-STORE RSP, which shall not cause retry of the 
+      failed Attributes Modification Notifications.<br/>
+      Typically used to avoid retries of Attributes Modification Notifications failed because 
+      the target entity does not exists at the forward destination.<br/> 
+      S. also attribute EntityNotFoundErrorCode of the Attributes Modification SCP Service.<br/>
+      Format: 'nnnnn' for code as integer or 'xxxxH' for hexadecimal value.
+      ]]></description>
+      <name>NoRetryErrorCode</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="B006H"/>
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write"
+      getMethod="isBindToCallingAET"
+      setMethod="setBindToCallingAET">
+      <description>Bind socket to address of CallingAET.
+      </description>
+      <name>BindToCallingAET</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write" getMethod="getPriority" setMethod="setPriority">
+      <description>Priority used in C-MOVE requests.
+      Enumerated Values: LOW, MEDIUM, HIGH.
+      </description>
+      <name>Priority</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="MEDIUM"/>
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write"
+     getMethod="getConnectTimeout"
+     setMethod="setConnectTimeout">
+      <description>Connection timeout in ms. 0 = no timeout</description>
+      <name>ConnectTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="0"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getAcceptTimeout"
+     setMethod="setAcceptTimeout">
+      <description>A-Associate accept timeout in milliseconds. 0 = no timeout.</description>
+      <name>AcceptTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="10000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write" 
+     getMethod="getRetrieveRspTimeout"
+     setMethod="setRetrieveRspTimeout">
+      <description>Timeout in milliseconds for receiving DIMSE-RSP for an open C-MOVE request. 0 = no timeout.
+      </description>
+      <name>RetrieveRspTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="60000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getReleaseTimeout"
+     setMethod="setReleaseTimeout">
+      <description>Timeout in ms for receiving A-RELEASE-RP.
+      </description>
+      <name>ReleaseTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="5000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getSocketCloseDelay"
+     setMethod="setSocketCloseDelay">
+      <description>Delay in ms for Socket close after sending A-ABORT.
+      </description>
+      <name>SocketCloseDelay</name>
+      <type>int</type>
+      <descriptors>
+         <value value="50"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMaxPDULengthReceive"
+      setMethod="setMaxPDULengthReceive">
+      <description>Maximum protocol data unit (PDU) package length for receiving PDUs.
+      </description>
+      <name>MaximumPDULengthReceive</name>
+      <type>int</type>
+      <descriptors>
+         <value value="16352"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMaxOpsInvoked"
+      setMethod="setMaxOpsInvoked">
+      <description>Maximum number of outstanding operations this MOVE SCU will invoke on one Association. 0 = no limit
+      </description>
+      <name>getMaxOpsInvoked</name>
+      <type>int</type>
+      <descriptors>
+         <value value="0"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTcpNoDelay"
+      setMethod="setTcpNoDelay">
+      <description>Send packets as quickly as possible (Disable Nagle's algorithmn).
+      </description>
+      <name>TcpNoDelay</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write" getMethod="getRetryIntervalls" setMethod="setRetryIntervalls">
+      <description>Number and intervals of retries for failed 
+      Instance Available or Study Content Notification requests. &lt;br&gt;Format:
+      &lt;br&gt;Comma separated list of &lt;i&gt;number&lt;/I&gt; x &lt;i&gt;interval&lt;/I&gt; pairs.
+      &lt;br&gt;The interval can be specified in seconds (##s),
+      minutes (##m), hours (##h) or days (##d).
+      &lt;br&gt;Example: 
+      &lt;br&gt;5x1m,10x10m means retry a total of 5 times, one minute
+      apart for each retry; then retry a total of 10 times, 10 minutes 
+      apart for each retry.
+      </description>
+      <name>RetryIntervals</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="5x1m,12x5m,24x1h,7x1d"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write" 
+     getMethod="getQueueName"
+     setMethod="setQueueName">
+      <description>Used internally. Do not modify.</description>
+      <name>QueueName</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="AttributesModification_web" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTlsCfgServiceName"
+      setMethod="setTlsCfgServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>TlsCfgServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getJmsServiceName"
+      setMethod="setJmsServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>JMSServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write" getMethod="getConcurrency" setMethod="setConcurrency">
+      <description>Maximum number of concurrent sent notifications.
+      </description>
+      <name>Concurrency</name>
+      <type>int</type>
+      <descriptors>
+         <value value="1"/>
+      </descriptors>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Schedule Attribute Modifications Notification to configured calledAETs.
+      		]]> </description>
+      <name>scheduleModification</name>
+      <parameter>
+        <description>DicomObject with modified attributes</description>
+        <name>obj</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Schedule Attribute Modifications Notification to configured calledAETs.
+      		]]> </description>
+      <name>scheduleModification</name>
+      <parameter>
+        <description>DicomObject with modified attributes</description>
+        <name>obj</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description>Query Retrieve Level for Modification Attributes Notification</description>
+        <name>level</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Modifying System</description>
+        <name>system</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Reason for Attributes Modification</description>
+        <name>reason</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+
+</mbean>

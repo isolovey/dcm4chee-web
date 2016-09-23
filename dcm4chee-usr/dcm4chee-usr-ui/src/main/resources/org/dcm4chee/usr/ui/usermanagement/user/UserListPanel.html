@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+	<wicket:panel>
+		<div wicket:id="add-user-window" />
+		<div wicket:id="change-password-window" />
+        <div wicket:id="manage-roles-window" />
+		<div wicket:id="confirmation-window" />
+		<div style="clear: both; margin-top: 5px;" />
+		<button wicket:id="toggle-user-form-link">
+			<img wicket:id="toggle-user-form-image" alt="New user" />
+			<span wicket:id="userlist.add-user-form.title" />
+		</button>
+		<table rules="groups" class="content-table" style="clear: both; margin-top: 9px;">
+		  <thead>
+		    <tr>
+				<th style="width: 10%">
+					<wicket:message key="userlist.table.userid_title">
+						[User ID]
+					</wicket:message>
+				</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th>
+                    <wicket:message key="userlist.table.assigned-roles">
+                        [User ID]
+                    </wicket:message>
+				</th>
+				<th style="width: 100%"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr wicket:id="role-rows">
+				<td wicket:id="userID">
+		      		[User ID]
+		      	</td>
+				<td>
+					<a wicket:id="change-password-link" href="#">
+						<img wicket:id="img-change-password" />
+					</a>
+		      	</td>
+				<td>
+					<a wicket:id="remove-user-link" href="#">
+						<img wicket:id="img-delete" />
+					</a>
+		      	</td>
+                <td>
+                    <a wicket:id="manage-roles-link" href="#">
+                        <img wicket:id="img-roles" />
+                    </a>
+                </td>
+                <td>
+                    <nobr>
+                        <div wicket:id="assigned-roles" />
+                    </nobr>
+                </td>
+                <td></td>
+		    </tr>
+		  </tbody>
+		</table>
+		</wicket:panel>
+	</body>
+</html>	

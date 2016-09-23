@@ -1,0 +1,45 @@
+UPDATE INSTRUCTIONS FOR DCM4CHEE WEB3:
+==========================================================
+
+Precondition:
+
+Installed DCM4CHE Archive instance with installed dcm4chee-web version < 3.0.3
+
+Update Procedure:
+
+1. Extract the binary distribution package of dcm4chee-web for the database
+of your choice. Avoid using a directory that has a name that contains spaces
+as installation directory.
+
+2. Stop your DCM4CHEE archive instance.
+
+3. Move to <DCM4CHEE>/server/default/deploy and delete dcm4chee-web-ear-*.ear
+
+4. Move to the dcm4chee-web-3.0.3-<db>/bin directory and execute the
+install.bat or install.sh script, as appropriate for your operating
+system, with the path of your DCM4CHEE installation directory as parameter.
+
+Cleanup Procedure:
+Due to issue WEB-933 it may be possible that folder and trash contains instances which 
+are referencing one and the same file. This may result in data loss if such an instance 
+get's deleted from trash.
+To find and correct such situations you have to deploy and run the cleanup service.
+
+1. copy dcm4chee-web-3.0.3-<db>/cleanup/dcm4chee-cleanup-ear-3.0.3-<db>.ear to 
+   <DCM4CHEE>/server/default/deploy
+2. Start DMC4CHEE archive
+3. Open jmx-console (http://localhost:8080/jmx-console)
+4. Open dcm4chee.update service=CleanupDuplicatedFilesService
+5. (Optional) Get an overview about duplicated file references with following commands:
+   a) countDuplicates(): Show number of duplicated file references in folder (ONLINE_STORAGE) 
+   b) showDuplicates() : List duplicated files with info about Patient/Study/Series and Instance 
+   c) countDuplicatedTrashFiles(): Show number of files in trash which are also referenced in folder 
+   d) showDuplicatedTrashFiles() : List files in trash with Patient/Study/Series and Instance info
+6. Correct duplicated file references by invoking cleanup():
+   Performed corrections:
+   a) Duplicates in folder are copied to a new file
+   b) Duplicates in trash are removed from trash
+   Info about duplicated file references are documented in <DCM4CHEE>/server/default/log/cleanup.log
+   This informations can be use to manually correct your data (delete wrong instances)
+
+After cleanup the service can be removed by deleting dcm4chee-cleanup-ear-3.0.3-<db>.ear from deploy directory    

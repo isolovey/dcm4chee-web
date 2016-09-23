@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>Cleanup service to correct duplicated file entries (using same filePath) in ONLINE_STORAGE and trash</b><br />
+      	<dl><dt>Correction steps:</dt>
+      	<dd>1) Files with same file references on RW filesystems of configured <i>OnlineFsGroup</i> 
+      	will be copied to avoid data loss if such a file gets deleted.<br />
+      	The Patient/Study/Series/Instance about this duplicated files are logged in &lt;LOG_DIR&gt;/cleanup.log
+      	and can be used to manually correct this issues.<br /></dd>
+      	<dd>2) Files in trash which filePath are also referenced in folder will be deleted from trash.</dd></dl>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.cleanup.sar.CleanupDuplicatedFilesService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>CleanupDuplicatedFilesService</name>
+    </constructor>
+
+   <attribute access="read-write"
+      getMethod="getOnlineFsGroup"
+      setMethod="setOnlineFsGroup">
+      <description>Filesystem group ID of online storage to check duplicates on RW file systems.
+      </description>
+      <name>OnlineFsGroup</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value='ONLINE_STORAGE' />
+      </descriptors>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Count duplicated file references in configured online storage group
+      		]]> </description>
+      <name>countDuplicates</name>
+      <return-type>int</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Show duplicated file references in configured online storage group
+      		]]> </description>
+      <name>showDuplicates</name>
+      <return-type>java.lang.String</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Count trash files which are also referenced in folder.
+      		]]> </description>
+      <name>countDuplicatedTrashFiles</name>
+      <return-type>int</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Show trash files which are also referenced in folder.
+      		]]> </description>
+      <name>showDuplicatedTrashFiles</name>
+      <return-type>java.lang.String</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Cleanup folder and trash to correct duplicated file references.<br />
+      	1) Duplicated files in folder are renamed.<br />
+      	2) Files in trash which are also referenced in folder are removed.<br />
+      	Info about duplicated files in folder are listed in &lt;LOG_DIR&gt;/cleanup.log.
+      		]]> </description>
+      <name>cleanup</name>
+      <return-type>java.lang.String</return-type>
+   </operation>
+
+</mbean>

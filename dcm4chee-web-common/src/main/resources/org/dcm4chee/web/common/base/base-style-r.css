@@ -1,0 +1,215 @@
+/*
+    Base CSS for dark rooms
+*/
+
+iframe.external {background-color: #ffffff;}
+
+input, select, textarea {background: #666666; color: #aaaaaa; border-style: solid; border-width: 1px; border-color: #888888}
+input[disabled] { background-color: #446666; }
+button { background-color: #999999;
+	border-top-color: #555555; border-left-color: #555555; 
+	border-radius: 3px;}
+
+body { font-family: Verdana, sans-serif; font-size: 12px; background-color: #111111; color: #aaaaaa;}
+body.white {background-color: #ffffff; color: black;}
+
+h1 { font-size: 26px; margin-bottom:18px; }
+h1.ph1 { font-size: 21px; margin-bottom:18px; }
+h2 { font-size: 21px; margin-bottom:18px; }
+h3 { font-size: 16px; }
+h4 { font-size: 13.4px; }
+
+p,ul,ol,li,dl,dt,dd,div,td,th { font-size: 12px; }
+
+img { border: none; }
+
+div.signin { height: 400px; text-align: center; padding: 160px 0px 0px 0px; background-color: #446666;}
+div.signin table { width: 100%; padding: 60px 90px 10px 0px; background-color: #446666; }
+div.signin tr, div.signin td { width: 50%; height: 35px; border-style: none; }
+div.signin span.login-desc { font-size: 20px; font-weight: bold; }
+div.tab-logo img {background: #ffffff; padding: 5px; border-radius: 3px; margin-top: -5px;}
+div.signin input {color: #cccccc; border-radius: 3px; padding-left: 2px;}
+div.signin input.button {background-color: #888888; color: #000000; border-color: #444444; border-radius: 5px; text-align: center; padding: 2px;}
+
+div.module-selector {
+    width: 100%;
+    min-height: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    z-index: 1;
+    background-color: #111111;
+    background-image: url("images/menu-r-bg.gif");
+    background-repeat: repeat-x;
+    background-attachment: scroll;
+    background-position: left top;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: auto auto;
+}
+div.viewport-and-actions { color: #aaaaaa; }
+
+div.module-selector table.tabpanel tr.tab-row td { 
+    white-space: nowrap; 
+    margin: 0px; 
+    min-height: 48px;
+}
+
+div.module-selector table.tabpanel {
+    float: left;
+	margin-top: -6px;
+    margin-left: 38px;
+}
+
+div.module-selector table.tabpanel tr.tab-row a:link, 
+div.module-selector table.tabpanel tr.tab-row a:visited {
+    float: left; 
+    padding: 3px 15px 0px;
+    line-height: 43px;
+    color: #aaaaaa;
+}
+
+div.module-selector table.tabpanel tr.tab-row td.selected a:link, 
+div.module-selector table.tabpanel tr.tab-row a:visited.active {
+    float: left; 
+    color: #aaaaaa; 
+    background: #444444 url("images/current-r-bg.gif") bottom left repeat-x; 
+}
+
+div.module-selector table.tabpanel tr.tab-row a:hover { background: #444444; }
+
+div.module-selector table.menu-right { float: right; }
+div.module-selector table.menu-right td { 
+    padding: 0px 15px 0px; 
+    line-height: 43px;
+}
+
+div.module-selector table.menu-right div.menu-item a {
+    color: #aaaaaa; 
+}
+
+div.module-selector table.menu-right div.menu-item img {
+    margin-top: 6px; background-color: #ffffff; padding: 5px; border-radius: 3px;
+}
+
+div.module-panel { width: 100%; background: none #111111; padding-top: 1px; color: #aaaaaa;}
+div.module-panel input, select {background: #666666; color: #aaaaaa; border-style: solid; border-width: 1px; border-color: #888888}
+
+div.viewport-and-actions { margin-top: 20px; margin-bottom: 5px; padding: 5px; }
+div.viewport { float: left; margin-right: 40px; }
+img.hourglass { float: left; margin-left: 20%; }
+div.actions { text-align: right; }
+
+/*
+    table.search-table
+*/
+table.search-table { border: thin; border-width: 1px; border-style: solid; border-color: #000000; width:100%; white-space: nowrap; background-color: #444444; color: #aaaaaa }
+table.search-table th { background-color: #666666; color: white; width: 20px; height: 20px; text-align: left; }
+table.search-table input, select { background-color: #666666; color: white; border-style: solid; border-color: #888888; }
+table.search-table tr { vertical-align: bottom; }
+table.search-table tr td{ padding-bottom:4px;}
+table.search-table tr.search-table-footer { height: 30px; }
+table.search-table tr.search-table-footer td.buttonPanel{ text-align: right; }
+table.search-table tr.search-table-extended { background-color: #555555; border-style: solid; border-width: 1px;  margin-top: 10px;}
+table.search-table tr.search-table-extended td { padding-top: 5px; padding-bottom: 5px;}
+table.search-table span.toggle-text { vertical-align: middle; }
+table.search-table div.search-header { text-decoration: underline; }
+table.search-table .yui-skin-sam div.calheader { width: 14em; }
+table.search-table .search-table-footer button { margin-left: 5px;}
+table.search-table .search-table-footer td { padding-bottom: 3px;}
+table.search-table .search-table-extended td { padding-bottom: 3px;}
+
+/*
+    table.content-table
+*/
+table.content-table { border: thin; border-width: 1px; border-style: solid; border-color: #aaaaaa; border-collapse: collapse; empty-cells: show; width:100%; white-space: nowrap; background-color: #FFFFFF; }
+table.content-table th { background-color: #444444; color: #aaaaaa; width: 20px; height: 30px; text-align: left; }
+table.content-table tr { background-color: #446666; color: #cccccc; height: 25px; width: auto; border: thin; border-width: 1px; border-style: solid; border-color: #AAAAAA; }
+table.content-table tr.odd { background-color: #555555; color: #cccccc;}
+table.content-table tr.even { background-color: #446666; color: #cccccc;}
+table.content-table tr td.expand { width: 21px; border: thin; border-left-width: 1px; border-left-style: solid; border-left-color: #AAAAAA; }
+table.content-table tr td.action { text-align: center; }
+table.content-table tr th, table.content-table tr td { padding-left: 10px; padding-right: 10px; }
+
+/*
+    table.folded-table
+*/
+table.folded-table { border: thin; border-width: 1px; border-style: solid; border-color: #AAAAAA; border-collapse: collapse; empty-cells: show; width:100%; white-space: nowrap; background-color: #FFFFFF; }
+table.folded-table tr { height: 25px; width: auto; border: thin; border-width: 1px 1px 0px; border-style: solid; border-color: #AAAAAA; }
+table.folded-table tr.expand td.expand, 
+table.folded-table tr.study td.expand, 
+table.folded-table tr.pps td.expand, 
+table.folded-table tr.series td.expand, 
+table.folded-table tr.instance td.expand,
+table.folded-table tr.patient td.expand { width: 21px; border: thin; border-left-width: 1px; border-left-style: solid; border-left-color: #AAAAAA; }
+table.folded-table tr.file { background-color: #E1E0DE; color: black; }
+table.folded-table tr.instance { background-color: #D1FEF6; color: black; }
+table.folded-table tr.instance_selected { background-color: orange; color: black;}
+table.folded-table tr.series { background-color: #A0D8C4; color: black; }
+table.folded-table tr.series_selected { background-color: orange; color: black;}
+table.folded-table tr.pps { background-color: #54B291;  color: black;}
+table.folded-table tr.pps_selected { background-color: orange; color: black;}
+table.folded-table tr.study { background-color: #446666; color: #FFFFFF;}
+table.folded-table tr.study_selected { background-color: orange; color: black;}
+table.folded-table tr.patient { background-color: #666666; color: white; }
+table.folded-table tr.patient_selected { background-color: orange; color: black;}
+table.folded-table tr.expand { background-color: #444444; color: white; }
+
+div.dicomobjectpanel { border: thin; border-width: 1px; border-style: inset; border-color: #AAAAAA; }
+table.dicomobject { background: #111111; color: #eeeeee; width: 100%; }
+
+.invalid { background: #EEBBAA; }
+
+.msgWindow { background-color: #446666; color: white; width: 100% ; height: 100%; text-align: center;}
+.msgWindow a:link { text-decoration:none; font-weight:bold; color:#000000; }
+.msgWindow a:visited { text-decoration:none; font-weight:bold; color:#000000; }
+.msgWindow_header { background-color: #54B291; color: black;}
+.msgWindow_content { height: 63%; width: 90%;position: absolute; left: 5%; top: 40px; }
+.msgWindow-msg { width:90%; position: absolute; left: 5%; top: 45%; }
+.msgWindow-button { width: 50%; position: absolute; left: 25%; top: 80%; }
+
+.confirmWindow { background-color: #446666; color: white; width: 100% ; height: 100%; text-align: center;}
+.confirmWindow_msg { padding: 10px; margin: 0 0 0.7em;}
+.confirmWindow_remark { padding: 10px; margin: 0 0 0.7em; color:#ff7777; }
+.confirmWindow_button { padding: 10px; margin-top: 1em;}
+
+div.movePage-msg {color: #ffffff; }
+div.movePage-previewOrigin {color: #bbbbbb; }
+div.movePage-previewDest {color: #bbbbbb; }
+div.edit-title {margin-bottom: 9px;}
+div.edit-content div.edit-table-panel { width: 100%; }
+div.edit-table-panel div.edit-table-row { float: left; width: 100%; background: #222222; color: #aaaaaa; height: 30px;}
+div.edit-table-panel .edit-desc { border: none; float: left; text-align: right; vertical-align: middle; margin: 2px 6px 0px; width: 50%; }
+div.edit-table-panel .edit-value { border: none; float: left; text-align: left; vertical-align: middle; margin: 2px 6px 0px; width: auto; }
+.edit-attrname { border: none; float: left; text-align: left; vertical-align: middle; margin: 2px 6px 0px; width: 50%;}
+div.edit-buttons { background: none #999999; width: 100%; height: 30px; text-align: center; vertical-align: middle; float: left;}
+div.edit-buttons input { background-color: #444444; margin-top: 3px; color1: black;
+	border-top-color: #222222; border-left-color: #222222; 
+	border-bottom-color: #666666; border-right-color: #666666; 
+	border-radius: 3px;}
+div.module-panel div.edit-title { margin-bottom: 9px; margin-top: 50px; }
+
+div.mpps-info { background-color: #446666; color: #aaaaaa; }
+div.filesystem, div.dashboard { color: black; }
+div.dashboard-report { color: #aaaaaa; }
+
+div.imageSelectWindow { background-color: #111111;, color: #aaaaaa; }
+
+table.search-table input.IE_DEFAULT_SUBMIT {color: #444444; background-color: #444444; border: none; width: 1px; height: 1px; }
+
+div.imageSelectWindow div.msgWindow_header { background-color: #446666; color: #eeeeee; padding: 5px}
+div.imageSelectWindow table.folded-table tr { background-color: #111111; color: #eeeeee; }
+div.imageSelectWindow table.folded-table tr.series { background-color: #54B291; color: black; }
+div.imageSelectWindow table.folded-table td.imageSelect{ background-color: #111111; color: #aaaaaa; }
+
+div.w_content_container {background-color: #444444;}
+
+.longText { max-width: 300px; overflow: hidden; white-space: nowrap; }
+
+.export_succeed {color: black !important; background: none #77bb77 !important;}
+.export_running {color: black !important;}
+.export_failed {color: black !important;}
+.export_nop {color: white !important;}

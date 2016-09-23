@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>dcm4chee-web-sar-bridge</artifactId>
+        <groupId>dcm4che.dcm4chee</groupId>
+        <version>${project.version}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>dcm4che.dcm4chee</groupId>
+    <artifactId>dcm4chee-web-sar-bridge-interface</artifactId>
+    <version>${project.version}</version>
+    <packaging>jar</packaging>
+    <name>Interfaces for ejb2 based service (compile without maven dependency)</name>
+    <dependencies>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jboss-packaging-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <optimise>true</optimise>
+                    <debug>true</debug>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

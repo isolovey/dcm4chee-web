@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	 version="2.4">
+    <servlet>
+	    <servlet-name>dicom-security-servlet</servlet-name>
+	    <servlet-class>org.dcm4chee.web.dicom.DicomSecurityServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	    <servlet-name>dicom-security-servlet</servlet-name>
+	    <url-pattern>/dicom-security-servlet</url-pattern>
+    </servlet-mapping>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Web3</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>dcm4chee-dicom</realm-name>
+    </login-config>
+</web-app>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div class="donotprint">
+			<table class="content-table">
+				<thead>
+					<tr>
+						<th>
+							<wicket:message key="dashboard.report.display.header.title" />
+						</th>
+						<th>
+							<wicket:message key="dashboard.report.display.header.date" />
+						</th>
+						<th>
+							<div wicket:id="statement-header" />
+						</th>
+	    			</tr>
+	  			</thead>
+	  			<tbody>
+					<tr>
+						<td>
+							<div wicket:id="title" />
+						</td>
+						<td>
+							<div wicket:id="date" />
+						</td>
+						<td>
+							<div wicket:id="statement" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="diagram-panel">
+			<div wicket:id="diagramPanel" />
+		</div>
+		<div class="table-panel" style="clear: both;">
+			<div wicket:id="tablePanel" />
+		</div>
+	</body>
+</html>

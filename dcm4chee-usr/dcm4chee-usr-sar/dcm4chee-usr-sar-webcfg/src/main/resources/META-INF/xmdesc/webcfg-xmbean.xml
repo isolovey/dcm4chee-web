@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>Web3 Configuration Service</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.usr.service.webcfg.WebCfgService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>WebCfgService</name>
+    </constructor>
+
+   <attribute access="read-write"
+      getMethod="isManageUsers"
+      setMethod="setManageUsers">
+      <description><![CDATA[Manage users in the web application.
+      ]]></description>
+      <name>manageUsers</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWebConfigPath"
+      setMethod="setWebConfigPath">
+      <description><![CDATA[
+        Configuration Path for web specific config files.<br/>
+        A relative path name is resolved relative to archive-install-directory/server/default/.]]>
+      </description>
+      <name>WebConfigPath</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="conf/dcm4chee-web3"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getUserMgtUserRole"
+      setMethod="setUserMgtUserRole">
+      <description><![CDATA[User Rolename for User Management.
+      ]]></description>
+      <name>UserMgtUserRole</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="WebUser"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getUserMgtAdminRole"
+      setMethod="setUserMgtAdminRole">
+      <description><![CDATA[Admin Rolename for User Management.
+      ]]></description>
+      <name>UserMgtAdminRole</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="WebAdmin"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWindowSizeConfig"
+      setMethod="setWindowSizeConfig">
+      <description><![CDATA[Window size configuration of modal windows.<br/>
+        Format: &lt;name&gt;:&lt;width&gt;x&lt;height&gt;<br/>
+        <dl><dt>Following window names can be used:</dt>
+        <dd>default:   default size</dd>
+        <dd>addUser: Add user in User Management</dd>
+        <dd>changePassword: Change password in User Management</dd>
+        <dd>manageRoles: Manage roles in User Management</dd>
+        <dd>editRole: New role and edit role in User Management</dd>
+        <dd>webPermissions: Web permissions in User Management</dd>
+        <dd>aetGroupAssignment: AET group assignment in User Management</dd>
+        <dd>editGroup: Edit group in User Management</dd>
+        <dd>editAETGroup: Edit AET group in User Management</dd>
+        <dd>aetAssignment: Assign AETs to AET group in User Management</dd>
+      ]]></description>
+      <name>WindowSizeConfig</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+            default:800x600
+            export:650x500
+            aeEdit:960x700
+            mwEdit:1024x768
+            mpps2mwl:1124x600
+            move:900x320
+            addUser:400x300
+            changePassword:400x300
+            manageRoles:300x700
+            editRole:570x350
+            webPermissions:300x700
+            aetGroupAssignment:300x700
+            editGroup:600x350
+            aetAssignment:300x700
+            "/>
+      </descriptors>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   <operation impact="ACTION">
+      <description>Get window size for given window name. Return an int[] with 0..width and 1..height</description>
+      <name>getWindowSize</name>
+      <parameter>
+        <description>Name of window</description>
+        <name>name</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>[I</return-type>
+   </operation>
+
+   &defaultOperations;
+</mbean>

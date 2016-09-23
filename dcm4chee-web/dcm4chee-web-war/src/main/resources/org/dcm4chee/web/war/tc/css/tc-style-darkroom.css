@@ -1,0 +1,544 @@
+/*******************************************************
+ *
+ *	DCM4CHEE WEB3: Teaching-File And Clinical Trial Page; 
+ *  CSS-based colors and styles
+ *
+ ******************************************************/
+
+
+/******************************************************************************
+ * MASK / WAIT CURSOR
+ *****************************************************************************/
+
+div.wicket-mask {
+ background:rgb(0,0,0);
+ opacity:.25;
+ filter:alpha(opacity=25);
+ -moz-opacity:0.25;
+ text-decoration:none;
+}
+
+div.wicket-mask-transparent {
+ background:rgb(0,0,0);
+ opacity:.0;
+ filter:alpha(opacity=0);
+ -moz-opacity:0.0;
+ text-decoration:none;
+}
+
+div.wicket-mask-cursor {
+ text-decoration:none;
+ cursor: wait;
+}
+
+
+/******************************************************  
+ * additional styles for jquery-ui based widgets
+ * attention: ordering of css rules matters!
+ *****************************************************/
+
+.ui-page
+{
+	background: #111111 !important;
+}
+
+.ui-content
+{
+	background: #444444;
+}
+
+.ui-input, .ui-widget-content .ui-input 
+{
+	background: #666;
+}
+
+.ui-input-hover, .ui-widget-content .ui-input-hover 
+{
+	border: 1px solid #C0C0C0 !important;
+}
+
+.ui-input-readonly, .ui-widget-content .ui-input-readonly
+{
+	border: 1px solid transparent;
+	background: #666;
+	color: #AAA;
+}
+
+.ui-combobox-input-readonly, .ui-widget-content .ui-combobox-input-readonly
+{
+	background: #666;
+	color: #AAA;
+}
+
+.ui-input-focus, .ui-widget-content .ui-input-focus
+{
+	border: 1px solid #cb9952;
+}
+
+
+
+/******************************************************  
+ * style of common elements 
+ *****************************************************/
+
+
+#trainingmode-link {
+	text-decoration: none;
+	color: #AAA;
+}
+ 
+.tc-popup
+{
+    background-color: #444;
+    border: 1px solid #AAA;
+    color: #AAA;
+}
+
+.tc-keyword-popup select
+{
+    border: none;
+    background: transparent;
+    color: #AAA;
+}
+
+.tc-keyword-popup option:hover
+{
+	background: #666;
+}
+
+.tc-keyword-popup option:checked
+{
+	background: #FFDEAD;
+}
+
+.tc-keyword-popup div.wicket-tree
+{
+    border: none;
+}
+
+.tc-keyword-popup div.wicket-tree div.row-selected 
+{
+    background: none;
+}
+
+.tc-keyword-popup div.wicket-tree a
+{
+    color: #AAA;
+}
+
+.tc-wado-image-thumbnail-container
+{
+    border: 1px solid transparent;
+}
+
+.tc-separator-horz
+{
+    border-top: 1px solid #AAAAAA;
+}
+
+.tc-separator-vert
+{
+    border-left: 1px solid #AAAAAA;
+}
+
+.tc-view-input-hidden
+{
+	display: none;
+}
+
+.tc-view-input-editable
+{
+}
+
+.tc-view-input-non-editable
+{
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: black;
+}
+
+.wicket-aa-container 
+{
+    background-color: #F5F5F5;
+    border: 1px solid #808080;
+}
+
+.wicket-aa 
+{
+    background-color: #F5F5F5;
+}
+
+.wicket-aa ul 
+{
+    list-style: none outside none;
+}
+
+.wicket-aa ul li.selected 
+{
+    font-weight: bold;
+}
+
+div.diagnosis-warning  {
+	color: #FF0000;
+	font-size: 12px;
+}
+
+/******************************************************  
+ * style of SEARCH elements 
+ *****************************************************/
+
+.tc-dialog div.w_content {
+	background-color: #444 !important;
+}
+    
+div.advanced-options-toggle-area 
+{
+    border-top: 1px solid #666;
+}
+
+div.advanced-options-toggle-area a
+{
+	color: #AAAAAA;
+}
+
+div.advanced-options-area div.choice-table-area
+{
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+}
+
+
+/******************************************************  
+ * style of RESULT elements 
+ *****************************************************/
+
+div.content-area
+{
+    border-top: 2px solid #A9A9A9;
+}
+
+table.tc-content-table
+{
+	background-color: medium none;
+	border: none;
+}
+
+table.tc-content-table tr th
+{
+	background-color: transparent;
+}
+
+table.tc-content-table tr td
+{
+    border-bottom: 1px solid #111111;
+}
+
+table.tc-content-table tr th.wicket_orderNone
+{
+    background-image: url(theme/images/order-none.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+table.tc-content-table tr th.wicket_orderUp
+{
+    background-image: url(theme/images/order-ascending.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+table.tc-content-table tr th.wicket_orderDown
+{
+    background-image: url(theme/images/order-descending.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+    
+table.tc-content-table tr.even-mouse-out 
+{ 
+    background-color: #666666; 
+    color: #AAA;
+}
+
+table.tc-content-table tr.even-mouse-over 
+{ 
+    background-color: #666666; 
+    color: #EEE;
+}
+
+table.tc-content-table tr.odd-mouse-out 
+{ 
+    background-color: #444;
+    color: #AAA;
+}
+
+table.tc-content-table tr.odd-mouse-over 
+{ 
+    background-color: #444;
+    color: #EEE;
+}
+
+table.tc-content-table tr.mouse-out-selected
+{ 
+    background-color: #CC7A29; 
+    color: #EEE;
+}
+
+table.tc-content-table tr.mouse-over-selected
+{ 
+    background-color: #CC7A29; 
+    color: #EEE;
+}
+
+table.tc-content-table tr th a 
+{ 
+    text-decoration: none;
+}
+
+table.tc-content-table tr th a:hover 
+{
+    text-decoration: underline;
+}
+
+table.tc-content-table-header td.numberOfMatchingInstances 
+{
+    font-weight: bold;
+}
+
+
+
+/******************************************************  
+ * style of DETAIL elements 
+ *****************************************************/
+
+
+div.details-area-header
+{
+	font-weight: bold;
+}
+
+div.no-details-area
+{
+	font-style: italic;
+    color: #808080;
+}
+
+hr.details-separator
+{
+    border-style: solid none none;
+    border-width: 1px medium medium;
+    border-image: none;
+}
+
+div.details-tabs .ui-tabs-nav {
+	background: #222;
+}
+
+div.details-tabs div.tab-row a:hover 
+{
+    color: black;
+}
+
+div.details-tabs div.tab-row a:link, div.details-tabs div.tab-row a:visited 
+{
+    background: #F5F5F5;
+    border: 1px solid #ccc;
+    color: black;
+}
+
+div.details-tabs div.tab-row li.selected a:link, div.details-tabs div.tab-row a:visited.active 
+{
+    background: white;
+    border: 1px solid #ccc;
+    color: black;
+}
+
+div.details-tabs div.tab-panel span.table-property-key
+{
+    color: #888;
+}
+
+div.details-tabs div.tab-row li 
+{
+    list-style-type: none;
+}
+
+div.details-tabs div.tab-row a:link, div.details-tabs div.tab-row a:visited 
+{
+    font-weight: normal;
+    text-decoration: none;
+}
+
+div.details-tabs div.tab-row a.disabled:link, div.details-tabs div.tab-row a.disabled:visited 
+{
+	color: #A9A9A9;
+	cursor: default;
+}
+
+div.details-tabs div.tab-row li.selected a:link, div.details-tabs div.tab-row a:visited.active 
+{
+    font-weight: bold;
+}
+
+
+
+/******************************************************  
+ * style of VIEW elements 
+ *****************************************************/
+
+#tc-view-case-navigator a {
+	text-decoration: none;
+}
+
+div.tc-view-title {
+	color: #CCC;
+}
+
+.tc-view .ui-tabs-nav {
+	background: #222;
+}
+
+.tc-view .tc-view-content {
+	background: #333;
+}
+
+.tc-view-tab-container
+{
+    background: transparent;
+}
+
+.tc-view-overview-row-key
+{
+	color: #AAA;
+}
+
+.tc-view-images-tab-container-parent
+{
+    background-color: #161616 !important;
+}
+
+.tc-view-images-tab-container-parent #details-images-nav-container
+{
+}
+
+.tc-view-images-thumbnail-indicator
+{
+	background: url("theme/images/load-indicator-small.gif") no-repeat scroll center center transparent;
+}
+
+.tc-view-images-thumbnail-hover
+{
+    background: none repeat scroll 0 0 darkgray !important;
+}
+
+.tc-view-images-thumbnail-selected
+{
+    background: none repeat scroll 0 0 orange !important;
+}
+
+
+#tc-view-images-thumbnail-container {
+	background: none repeat scroll 0 0 black !important;
+}
+
+#tc-view-images-thumbnail-container img
+{
+	border-radius: 4px;
+}
+
+#tc-view-images-prev-btn
+{
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+	opacity: 0.3;
+    -moz-opacity: 0.3;
+    filter: alpha(opacity=30);
+	background: url("theme/images/left-arrow.png") no-repeat scroll center center transparent;
+}
+
+#tc-view-images-prev-btn:hover
+{
+	opacity: 0.75;
+    -moz-opacity: 0.75;
+    filter: alpha(opacity=75);
+	background: url("theme/images/left-arrow-hover.png") no-repeat scroll center center transparent;
+}
+
+#tc-view-images-next-btn
+{
+    width: 32px;
+    height: 32px;
+   	display: inline-block;
+    opacity: 0.3;
+    -moz-opacity: 0.3;
+    filter: alpha(opacity=30);
+    background: url("theme/images/right-arrow.png") no-repeat scroll center center transparent;
+}
+
+#tc-view-images-next-btn:hover
+{
+	opacity: 0.75;
+    -moz-opacity: 0.75;
+    filter: alpha(opacity=75);
+    background: url("theme/images/right-arrow-hover.png") no-repeat scroll center center transparent;
+}
+
+#tc-view-images-series-chooser
+{
+    background: transparent;
+    color: gray;
+    border: medium none;
+    text-decoration: none;
+}
+
+#tc-view-images-series-chooser:hover
+{
+    color: white;
+    border: 1px solid gray;
+}
+
+#tc-view-images-series-popup
+{
+    background: #404040;
+    border: 1px solid #606060;
+}
+
+#tc-view-images-series-popup a
+{
+    text-decoration: none;
+    color: lightgray;
+    display: block;
+}
+
+#tc-view-images-series-popup a:hover
+{
+    color: white;
+}
+
+#documents-file-upload {
+	background-color: #222;
+}
+
+#link-search {
+	background-color: #222;
+}
+
+div.document-item {
+	border-top: 1px solid #AAAAAA;
+}
+
+div.document-item:hover {
+	background-color: #666;
+	color: #CCC;
+}
+
+div.document-item:hover a {
+	color: #EEE;
+}
+
+div.document-item span.link-relationship {
+	background: #888 !important;
+	border: 1px solid #AAA !important;
+	color: #CCC !important;
+}

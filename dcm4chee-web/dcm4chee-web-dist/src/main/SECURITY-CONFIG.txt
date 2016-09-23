@@ -1,0 +1,40 @@
+Security configuration:
+-----------------------
+
+The dcm4chee-web3 application supports the single sign on (SSO) implementation of the jboss web container.
+
+For activation, please do the following:
+
+    1) In the web.xml of the war module a web security method has to be declared:
+
+	i.e. FORM BASED:
+
+	    <login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>dcm4chee</realm-name>
+		<form-login-config>
+		    <form-login-page>/login.jsp</form-login-page>
+		    <form-error-page>/login.jsp</form-error-page>
+		</form-login-config>
+	    </login-config>
+    
+	or BASIC AUTH:
+
+	    <login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>dcm4chee</realm-name>
+	    </login-config>
+
+	FORM BASED authentication is used as a default.
+
+
+    2) In the server.xml of your jboss installation
+	(which defaults to server/default/deploy/jboss-web.deployer/)
+	enter:
+
+	<Valve className="org.apache.catalina.authenticator.SingleSignOn" requireReauthentication="true" />
+
+
+If there is no web security method declared in the web.xml of the war module, 
+the integrated security of the dcm4chee-web3 application is used and does the authentication.
+Note that in this case, even if you have entered the SSO valve in the server.xml, the SSO will not work.

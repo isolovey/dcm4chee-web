@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+        <div id="tc-view-images-main-container" class="ui-border-box" style="height:75%;">
+        	<div id="tc-view-images-main-content-container" class="ui-border-box" style="height:100%;text-align:center;vertical-align:middle;padding-top:15px;">
+        	    <div wicket:id="tc-view-images-prev-container" class="ui-corner-all tc-view-images-nav-container">
+               		<a id="tc-view-images-prev-btn" wicket:id="tc-view-images-prev-btn">
+                	</a>
+                </div>
+                <img wicket:id="tc-view-images-container-content-image" class="ui-corner-all"
+                	style="display:inline-block;max-height:93%;max-width:83%;vertical-align:middle;padding:5px;margin-bottom:5px;background-color:black;"/>
+                <div wicket:id="tc-view-images-next-container" class="ui-corner-all tc-view-images-nav-container">
+	            	<a id="tc-view-images-next-btn" wicket:id="tc-view-images-next-btn">
+		            </a>
+	            </div>
+	            <div wicket:id="tc-view-images-numberOf"></div>
+            </div>
+        </div>
+        <div style="height:25%;">
+	        <div id="tc-view-images-series-container" style="height:28%;padding-left:5px;">
+				<div wicket:id="tc-view-images-series-chooser-label" style="color:lightgray;margin-bottom:2px;padding-left:3px;"/>
+				<a id="tc-view-images-series-chooser" wicket:id="tc-view-images-series-chooser"
+						class="ui-corner-all" style="padding:3px;background-color:black;display:inline-block;"> 
+					<span wicket:id="tc-view-images-series-chooser-caption" style="display:inline-block;width:300px;"/> 
+					<img wicket:id="tc-view-images-series-chooser-img" style="float:right;"/>
+				</a>
+			</div>
+			<div id="tc-view-images-thumbnail-container" wicket:id="tc-view-thumbnail-container"
+				class="ui-border-box" style="height:72%;"/>
+		</div>
+		<div id="tc-view-images-series-popup"
+			wicket:id="tc-view-images-series-popup" class="tc-popup">
+			<div wicket:id="tc-view-images-series-list">
+				<a wicket:id="tc-view-images-series-list-item">
+				     <span wicket:id="tc-view-images-series-list-item-label"/>
+				</a>
+			</div>
+		</div>
+	</wicket:panel> 
+</body>
+</html>

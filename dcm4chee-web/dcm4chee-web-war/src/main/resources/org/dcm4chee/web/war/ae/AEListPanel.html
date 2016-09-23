@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+    <head>
+        <title>Application Entities</title>
+        <link href="ae-style.css" rel="stylesheet" />
+    </head>
+	<body>
+		<wicket:panel>
+			<div wicket:id="modal-window" />
+			<div wicket:id="echoPanel" >echoPanel</div>
+			<div wicket:id="confirm" >confirmDelete</div>
+			<div style="clear: both; margin-top: 5px;" />
+			<form wicket:id="form">
+	            <span wicket:id="type.filter.label" style="margin-left: 40px;" />
+	            <select wicket:id="type-selection" />
+	            <span wicket:id="titleSearch.label" style="margin-left: 40px;" />
+	            <input wicket:id="titleSearch" id="titleSearch" type="text" title="Title" />
+				<div class="viewport">
+					<div wicket:id="pagesize.label" style="float: left" />
+			      	<select wicket:id="pagesize" style="margin-left: 5px;"/>
+					<a wicket:id="prev" style="text-decoration: none;">
+						<img wicket:id="prevImg" />
+					</a>
+					<span wicket:id="viewport" />
+					<a wicket:id="next" style="text-decoration: none;">
+						<img wicket:id="nextImg" />
+					</a>
+				</div>
+				<button wicket:id="searchBtn">
+					<img wicket:id="searchImg" alt="Search" />
+					<span wicket:id="searchText" />
+				</button>
+			</form>
+			<button wicket:id="newAET">
+				<img wicket:id="newAETImg" alt="New AET" />
+				<span wicket:id="newAETText" />
+			</button>
+			<table rules="groups" class="content-table" style="clear: both; margin-top: 9px;">
+				<thead>
+				  <tr>
+				    <th wicket:id="titleHdr.label" />
+                    <th wicket:id="typeHdr.label" />
+				    <th wicket:id="hostHdr.label" />
+				    <th wicket:id="portHdr.label">Port</th>
+				    <th wicket:id="descriptionHdr.label">Description</th>
+				    <th wicket:id="cipherHdr.label">Cipher Suites</th>
+				    <th wicket:id="emulatedHdr.label">MPPS Emulated</th>
+				    <th wicket:id="stationHdr.label">Station Name</th>
+				    <th wicket:id="institutionHdr.label">Institution</th>
+				    <th wicket:id="departmentHdr.label">Department</th>
+				    <th colspan="3" />
+				  </tr>
+				</thead>
+			  <tr wicket:id="list">
+			    <td wicket:id="title">[Title]</td>
+                <td wicket:id="aeGroup">[AE Group]</td>
+			    <td wicket:id="hostName">[Host]</td>
+			    <td wicket:id="port">[Port]</td>
+			    <td wicket:id="description">[Description]</td>
+			    <td style="text-align: center; width: 20px;">
+					<input type="checkbox" wicket:id="cipherSuites" />
+			    </td>
+			    <td style="text-align: center; width: 20px;">
+					<input type="checkbox" wicket:id="emulated" />
+			    </td>
+			    <td wicket:id="stationName">[Station Name]</td>
+			    <td wicket:id="institution">[Institution]</td>
+			    <td wicket:id="department">[Department]</td>
+			    <td style="text-align: center; width: 20px;">
+			        <a wicket:id="editAET" href="#">
+			        	<img wicket:id="ae.editAET.image" />
+			        </a>
+			    </td>
+			    <td style="text-align: center; width: 20px;">
+			        <a wicket:id="removeAET" href="#">
+			        	<img wicket:id="ae.removeAET.image" />
+					</a>
+			    </td>
+			    <td style="text-align: center; width: 20px;">
+			        <a wicket:id="echo" href="#">
+			        	<img wicket:id="ae.echoAET.image" />
+			        </a>
+			    </td>
+			  </tr>
+			</table>
+		</wicket:panel>
+	</body>
+</html>

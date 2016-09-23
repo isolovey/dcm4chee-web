@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server PUBLIC "-//JBoss//DTD MBean Service 4.2//EN" "http://www.jboss.org/j2ee/dtd/jboss-service_4_2.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<server>
+  <mbean code="org.dcm4chee.web.service.tlscfg.TlsCfgService" 
+         name="dcm4chee.web:service=TlsConfig"
+         xmbean-dd="resource:META-INF/xmdesc/tlscfg-xmbean.xml">
+
+  </mbean>
+</server>

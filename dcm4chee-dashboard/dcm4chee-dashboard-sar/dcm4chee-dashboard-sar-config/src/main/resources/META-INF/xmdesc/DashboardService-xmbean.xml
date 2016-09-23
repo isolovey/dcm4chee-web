@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC
+   "-//JBoss//DTD JBOSS XMBEAN 1.2//EN"
+   "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_2.dtd">
+<mbean>
+   <description>Management Bean.</description>
+   <descriptors>
+      <persistence persistPolicy="OnUpdate" />
+      <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+   </descriptors>
+   <class>org.dcm4chee.dashboard.mbean.DashboardService</class>
+   <constructor>
+      <description>MBean Constructor.</description>
+      <name>org.dcm4chee.dashboard.mbean.DashboardService</name>
+   </constructor>
+	<attribute access="read-write" getMethod="getDomainNames" setMethod="setDomainNames">
+        <description>
+            Represents the domain name list to query queues
+        </description>
+        <name>domainNames</name>
+        <type>java.lang.String</type>
+        <descriptors>
+            <value>dcm4chee.archive</value>
+        </descriptors>
+    </attribute>
+	<attribute access="read-write" getMethod="getDataSourceList" setMethod="setDataSourceList">
+        <description>
+            Represents the jndi names for the configured data sources
+        </description>
+        <name>dataSourceList</name>
+        <type>java.lang.String</type>
+        <descriptors>
+            <value>java:pacsDS</value>
+        </descriptors>
+    </attribute>
+	<attribute access="read-write" getMethod="getGroupList" setMethod="setGroupList">
+        <description>
+            Represents the configured file system groups, 
+            as strings, separated by newline
+        </description>
+        <name>groupList</name>
+        <type>java.lang.String</type>
+        <descriptors>
+            <value>dcm4chee.archive:service=FileSystemMgt,group=ONLINE_STORAGE</value>
+        </descriptors>
+    </attribute>
+	<attribute access="read-write" getMethod="getOtherList" setMethod="setOtherList">
+        <description>
+            Represents configured additional file systems to display, 
+            as strings, separated by newline
+        </description>
+        <name>otherList</name>
+        <type>java.lang.String</type>
+    </attribute>
+	<attribute access="read-write" getMethod="getPropertyList" setMethod="setPropertyList">
+        <description><![CDATA[
+            Represents the system properties to display, 
+            separated by newline
+            using json format, f.e.:
+            {
+            	"group":"Java",
+            	"label":"Version",
+                "name":"java.version",
+            }<br />
+            group is the name of the table group for display.<br />
+            label is the display name of the table row.<br />
+            name is the system property name.]]>
+        </description>
+        <name>propertyList</name>
+        <type>java.lang.String</type>
+        <descriptors>
+            <value>{"group":"Operating system","label":"Name","name":"os.name"}
+            {"group":"Operating system","label":"Architecture","name":"os.arch"}
+            {"group":"Operating system","label":"Version","name":"os.version"}
+			{"group":"Java","label":"Version","name":"java.version"}
+			</value>
+        </descriptors>
+    </attribute>
+    <attribute access="read-write" getMethod="getMBeanValueList" setMethod="setMBeanValueList">
+        <description><![CDATA[
+            Represents mbean values to display, 
+            separated by newline, 
+            using json format, f.e.:
+            {
+            	"group":"DICOM",
+            	"label":"Study Management",
+                "domain":"dcm4chee.archive",
+                "name":"StudyMgtScu",
+                "type":"attribute",
+                "function":"MaxSize"
+            }<br />
+            group is the name of the table group for display.<br />
+            label is the display name of the table row.<br />
+            domain is the MBean domain.<br />
+            name is the MBean name.<br />
+            type can be "attribute" or "method".<br />
+            function is the attribute or method name.]]>
+        </description>
+        <name>mbeanValueList</name>
+        <type>java.lang.String</type>
+    </attribute>
+	<attribute access="read-write" getMethod="getGroupFilename" setMethod="setGroupFilename">
+        <description>
+            Full path of file to contain the group declarations
+        </description>
+        <name>groupFilename</name>
+        <type>java.lang.String</type>
+        <descriptors>
+        	<value>dashboard.groups</value>
+		</descriptors>
+    </attribute>
+	<attribute access="read-write" getMethod="getReportFilename" setMethod="setReportFilename">
+        <description>
+            Full path of file to contain the report declarations
+        </description>
+        <name>reportFilename</name>
+        <type>java.lang.String</type>
+        <descriptors>
+        	<value>dashboard.reports</value>
+		</descriptors>
+    </attribute>
+    <attribute access="read-write" getMethod="getReportTablePagesize" setMethod="setReportTablePagesize">
+        <description>
+            Size of the table page (number of rows) for the pagination of the report result table
+        </description>
+        <name>reportTablePagesize</name>
+        <type>int</type>
+        <descriptors>
+            <value>20</value>
+        </descriptors>
+    </attribute>   
+    <attribute access="read-write" getMethod="getQueueDepthConfig" setMethod="setQueueDepthConfig">
+        <description>
+            Represents configured colors for specific queue depths, 
+            configured for each queue separately, 
+            separated by newline, 
+            using json format, f.e.:
+            {
+                "domain":"dcm4chee.archive",
+                "name":"StudyMgtScu",
+                "depths":[{"color":"yellow","depth":10},{"color":"red","depth":20}]
+            } 
+        </description>
+        <name>queueDepthConfig</name>
+        <type>java.lang.String</type>
+    </attribute>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>listAllFileSystemGroups</name>
+      <return-type>[Ljava.lang.String;</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>listFileSystemsOfGroup</name>
+      <parameter>
+         <name>groupname</name>
+         <type>java.lang.String</type>
+      </parameter>
+      <return-type>[Ljava.io.File;</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>getMinimumFreeDiskSpaceOfGroup</name>
+      <parameter>
+         <name>groupname</name>
+         <type>java.lang.String</type>
+      </parameter>
+      <return-type>long</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>getExpectedDataVolumePerDay</name>
+      <parameter>
+         <name>groupname</name>
+         <type>java.lang.String</type>
+      </parameter>
+      <return-type>long</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>getDefaultRetrieveAETitle</name>
+      <parameter>
+         <name>groupname</name>
+         <type>java.lang.String</type>
+      </parameter>
+      <return-type>java.lang.String</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>listOtherFileSystems</name>
+      <return-type>[Ljava.lang.String;</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>getSystemProperties</name>
+	  <return-type>java.util.List</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>getMBeanValues</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>listAllReports</name>
+      <parameter>
+         <name>groups</name>
+         <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4chee.dashboard.model.ReportModel;</return-type>
+   </operation>
+   <operation>
+      <name>createReport</name>
+      <parameter>
+         <name>report</name>
+         <type>org.dcm4chee.dashboard.model.ReportModel</type>
+      </parameter>
+      <parameter>
+         <name>isGroup</name>
+         <type>boolean</type>
+      </parameter>
+   </operation>
+   <operation>
+      <name>updateReport</name>
+      <parameter>
+         <name>report</name>
+         <type>org.dcm4chee.dashboard.model.ReportModel</type>
+      </parameter>
+   </operation>
+   <operation>
+      <name>deleteReport</name>
+      <parameter>
+         <name>report</name>
+         <type>org.dcm4chee.dashboard.model.ReportModel</type>
+      </parameter>
+      <parameter>
+         <name>isGroup</name>
+         <type>boolean</type>
+      </parameter>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>listQueueNames</name>
+	  <return-type>[[Ljava.lang.String;</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>listQueueAttributes</name>
+      <parameter>
+         <name>domainName</name>
+         <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+         <name>queueName</name>
+         <type>java.lang.String</type>
+      </parameter>
+	  <return-type>[I</return-type>
+   </operation>
+   <operation>
+      <description>MBean Operation.</description>
+      <name>listQueueDepthConfig</name>
+      <return-type>[Ljava.lang.String;</return-type>
+   </operation>
+</mbean>

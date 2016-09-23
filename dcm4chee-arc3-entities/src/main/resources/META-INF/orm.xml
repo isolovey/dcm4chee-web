@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0">
+  <persistence-unit-metadata>
+    <persistence-unit-defaults>
+      <entity-listeners>
+        <entity-listener class="org.dcm4chee.archive.entity.EntityLogger">
+          <pre-persist method-name="onPrePersist" />
+          <post-persist method-name="onPostPersist" />
+          <pre-remove method-name="onPreRemove" />
+          <post-remove method-name="onPostRemove" />
+          <pre-update method-name="onPreUpdate" />
+          <post-update method-name="onPostUpdate" />
+          <post-load method-name="onPostLoad" />
+        </entity-listener>
+      </entity-listeners>
+    </persistence-unit-defaults>
+  </persistence-unit-metadata>
+  
+  <package>org.dcm4chee.archive.entity</package>
+  
+  <mapped-superclass class="BaseEntity" metadata-complete="false">
+    <attributes>
+      <id name="pk">
+        <column name="pk" />
+        <generated-value strategy="@generation-type@" generator="seq" />
+      </id>
+    </attributes>
+  </mapped-superclass>
+
+  <entity class="AE" access="FIELD" metadata-complete="false">
+    <table name="ae" />
+    <sequence-generator name="seq" sequence-name="ae_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="Code" access="FIELD" metadata-complete="false">
+    <table name="code" />
+    <sequence-generator name="seq" sequence-name="code_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="codeMeaning">
+        <column name="code_meaning" column-definition="@nvarchar2@"/>
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="Device" access="FIELD" metadata-complete="false">
+    <table name="device" />
+    <sequence-generator name="seq" sequence-name="device_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="File" access="FIELD" metadata-complete="false">
+    <table name="files" />
+    <sequence-generator name="seq" sequence-name="files_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+  </entity>
+  
+  <entity class="FileSystem" access="FIELD" metadata-complete="false">
+    <table name="filesystem" />
+    <sequence-generator name="seq" sequence-name="filesystem_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="GPPPS" access="FIELD" metadata-complete="false">
+    <table name="gppps" />
+    <sequence-generator name="seq" sequence-name="gppps_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="pps_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="GPSPS" access="FIELD" metadata-complete="false">
+    <table name="gpsps" />
+    <sequence-generator name="seq" sequence-name="gpsps_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="item_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="GPSPSPerformer" access="FIELD" metadata-complete="false">
+    <table name="gpsps_perf" />
+    <sequence-generator name="seq" sequence-name="gpsps_perf_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="humanPerformerName">
+        <column name="human_perf_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="humanPerformerIdeographicName">
+        <column name="hum_perf_i_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="humanPerformerPhoneticName">
+        <column name="hum_perf_p_name" column-definition="@nvarchar2@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="GPSPSRequest" access="FIELD" metadata-complete="false">
+    <table name="gpsps_req" />
+    <sequence-generator name="seq" sequence-name="gpsps_req_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="HangingProtocol" access="FIELD" metadata-complete="false">
+    <table name="hp" />
+    <sequence-generator name="seq" sequence-name="hp_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="name">
+        <column name="hp_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="userGroupName">
+        <column name="hp_group" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="encodedAttributes">
+        <column name="hp_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="HPDefinition" access="FIELD" metadata-complete="false">
+    <table name="hpdef" />
+    <sequence-generator name="seq" sequence-name="hpdef_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="Instance" access="FIELD" metadata-complete="false">
+    <table name="instance" />
+    <sequence-generator name="seq" sequence-name="instance_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="inst_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="Media" access="FIELD" metadata-complete="false">
+    <table name="media" />
+    <sequence-generator name="seq" sequence-name="media_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+  </entity>
+  
+  <entity class="MPPS" access="FIELD" metadata-complete="false">
+    <table name="mpps" />
+    <sequence-generator name="seq" sequence-name="mpps_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="mpps_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="MWLItem" access="FIELD" metadata-complete="false">
+    <table name="mwl_item" />
+    <sequence-generator name="seq" sequence-name="mwl_item_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="scheduledPerformingPhysicianName">
+        <column name="perf_physician" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="scheduledPerformingPhysicianIdeographicName">
+        <column name="perf_phys_i_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="scheduledPerformingPhysicianPhoneticName">
+        <column name="perf_phys_p_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="encodedAttributes">
+        <column name="item_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="OtherPatientID" access="FIELD" metadata-complete="false">
+    <table name="other_pid" />
+    <sequence-generator name="seq" sequence-name="other_pid_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="Patient" access="FIELD" metadata-complete="false">
+    <table name="patient" />
+    <sequence-generator name="seq" sequence-name="patient_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="patientName">
+        <column name="pat_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="patientIdeographicName">
+        <column name="pat_i_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="patientPhoneticName">
+        <column name="pat_p_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="encodedAttributes">
+        <column name="pat_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="PrivateFile" access="FIELD" metadata-complete="false">
+    <table name="priv_file" />
+    <sequence-generator name="seq" sequence-name="priv_file_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="PrivateInstance" access="FIELD" metadata-complete="false">
+    <table name="priv_instance" />
+    <sequence-generator name="seq" sequence-name="priv_instance_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="inst_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="PrivatePatient" access="FIELD" metadata-complete="false">
+    <table name="priv_patient" />
+    <sequence-generator name="seq" sequence-name="priv_patient_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="pat_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="PrivateSeries" access="FIELD" metadata-complete="false">
+    <table name="priv_series" />
+    <sequence-generator name="seq" sequence-name="priv_series_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="series_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="PrivateStudy" access="FIELD" metadata-complete="false">
+    <table name="priv_study" />
+    <sequence-generator name="seq" sequence-name="priv_study_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="study_attrs" column-definition="@blob@"/>
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="RequestAttributes" access="FIELD" metadata-complete="false">
+    <table name="series_req" />
+    <sequence-generator name="seq" sequence-name="series_req_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="requestingService">
+        <column name="req_service" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="requestingPhysician">
+        <column name="req_physician" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="requestingPhysicianIdeographicName">
+        <column name="req_phys_i_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="requestingPhysicianPhoneticName">
+        <column name="req_phys_p_name" column-definition="@nvarchar2@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="Series" access="FIELD" metadata-complete="false">
+    <table name="series" />
+    <sequence-generator name="seq" sequence-name="series_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="institutionalDepartmentName">
+        <column name="department" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="institutionName">
+        <column name="institution" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="performingPhysicianName">
+        <column name="perf_physician" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="performingPhysicianIdeographicName">
+        <column name="perf_phys_i_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="performingPhysicianPhoneticName">
+        <column name="perf_phys_p_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="encodedAttributes">
+        <column name="series_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="Study" access="FIELD" metadata-complete="false">
+    <table name="study" />
+    <sequence-generator name="seq" sequence-name="study_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="referringPhysicianName">
+        <column name="ref_physician" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="referringPhysicianIdeographicName">
+        <column name="ref_phys_i_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="referringPhysicianPhoneticName">
+        <column name="ref_phys_p_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="studyDescription">
+        <column name="study_desc" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="encodedAttributes">
+        <column name="study_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="StudyOnFileSystem" access="FIELD" metadata-complete="false">
+    <table name="study_on_fs" />
+    <sequence-generator name="seq" sequence-name="study_on_fs_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="StudyPermission" access="FIELD" metadata-complete="false">
+    <table name="study_permission" />
+    <sequence-generator name="seq" sequence-name="study_permission_pk_seq" allocation-size="1" />
+  </entity>
+  
+  <entity class="VerifyingObserver" access="FIELD" metadata-complete="false">
+    <table name="verify_observer" />
+    <sequence-generator name="seq" sequence-name="verify_observer_pk_seq" allocation-size="1" />
+    <attributes>
+      <basic name="verifyingObserverName">
+        <column name="observer_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="verifyingObserverIdeographicName">
+        <column name="observer_i_name" column-definition="@nvarchar2@" />
+      </basic>
+      <basic name="verifyingObserverPhoneticName">
+        <column name="observer_p_name" column-definition="@nvarchar2@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="Issuer"
+      access="FIELD" metadata-complete="false">
+    <sequence-generator name="seq" sequence-name="issuer_pk_seq" allocation-size="1" />
+  </entity>
+    
+  <entity class="ContentItem"
+      access="FIELD" metadata-complete="false">
+    <sequence-generator name="seq" sequence-name="content_item_pk_seq" allocation-size="1" />
+  </entity>
+
+  <entity class="UPS" access="FIELD" metadata-complete="false">
+    <table name="ups" />
+    <sequence-generator name="seq" sequence-name="ups_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+    <attributes>
+      <basic name="encodedAttributes">
+        <column name="ups_attrs" column-definition="@blob@" />
+      </basic>
+    </attributes>
+  </entity>
+  
+  <entity class="UPSRequest" access="FIELD" metadata-complete="false">
+    <table name="ups_req" />
+    <sequence-generator name="seq" sequence-name="ups_req_pk_seq" allocation-size="1" />
+  </entity>
+  <entity class="UPSRelatedPS" access="FIELD" metadata-complete="false">
+    <table name="ups_rel_ps" />
+    <sequence-generator name="seq" sequence-name="ups_rel_ps_pk_seq" allocation-size="1" />
+  </entity>
+  <entity class="UPSReplacedPS" access="FIELD" metadata-complete="false">
+    <table name="ups_repl_ps" />
+    <sequence-generator name="seq" sequence-name="ups_repl_ps_pk_seq" allocation-size="1" />
+  </entity>
+  <entity class="UPSSubscription" access="FIELD" metadata-complete="false">
+    <table name="ups_subscr" />
+    <sequence-generator name="seq" sequence-name="ups_subscr_pk_seq" allocation-size="1" />
+  </entity>
+ 
+    <entity class="PublishedStudy" access="FIELD" metadata-complete="false">
+    <table name="published_study" />
+    <sequence-generator name="seq" sequence-name="published_study_pk_seq" allocation-size="1" />
+    <pre-persist method-name="onPrePersist" />
+    <pre-update method-name="onPreUpdate" />
+  </entity>
+  
+</entity-mappings>

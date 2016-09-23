@@ -1,0 +1,63 @@
+/*
+    Dashboard CSS
+*/
+
+body {font-family:font-family:Verdana,sans-serif !important}
+
+div.header {
+    background-color: #15253E !important;
+    color: white !important;
+    height: 20px !important;
+    text-align: left !important;
+    
+    border: thin !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: black !important;    
+}
+
+div.wicket-tree-table-body {
+    background-color: #FFFFFF !important;
+    
+    border: thin !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: black !important;
+}
+
+div.wicket-tree-table div.row, div.wicket-tree-table div.row-selected {
+    height: 25px !important;
+    min-height: 25px !important;
+}
+
+div.wicket-tree-table span.icon {
+    background-repeat: no-repeat;
+    background-position: center !important;
+    margin-left: 2px;
+    margin-top: 1px;
+}
+
+.result-message {
+    color: #000000;
+}
+
+.error-message {
+    color: red;
+}
+
+div.diagram-panel {
+    float: left;
+    margin: 20px;   
+}
+
+div.table-panel {
+    margin: 20px;   
+}
+
+span.c_ {
+    text-align: left;
+}
+
+div#reportTableCell {
+	text-align: left;
+}

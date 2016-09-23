@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<title>File Systems</title>
+		<link href="filesystem-style.css" rel="stylesheet" />
+	</head>
+	<body>
+		<wicket:panel>
+			<table style="clear: both">
+			  <thead>
+			    <tr>
+			      <th>PK</th>
+			      <th>Path/URL</th>
+			      <th>Group ID</th>
+			      <th>Retrieve AET</th>
+			      <th>Availability</th>
+			      <th>Status</th>
+			      <th>Next FS</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr wicket:id="list">
+			      <td wicket:id="pk">[PK]</td>
+			      <td wicket:id="directoryPath">[Path/URL]</td>
+			      <td wicket:id="groupID">[Group ID]</td>
+			      <td wicket:id="retrieveAET">[Retrieve AET]</td>
+			      <td wicket:id="availability">[Availability]</td>
+			      <td wicket:id="status">[Status]</td>
+			      <td wicket:id="nextFileSystem.directoryPath">[Next FS]</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</wicket:panel>
+	</body>
+</html>

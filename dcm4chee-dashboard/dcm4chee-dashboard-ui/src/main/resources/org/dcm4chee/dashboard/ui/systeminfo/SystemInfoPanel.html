@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<wicket:panel>
+			<table class="content-table" style="clear: both; margin-top: 9px;">
+				<thead>
+					<tr>
+						<th>
+							<wicket:message key="dashboard.systeminfo.memory-table.name.title" />
+						</th>
+						<th>
+							<wicket:message key="dashboard.systeminfo.memory-table.type.title" />
+						</th>
+						<th>
+							<wicket:message key="dashboard.systeminfo.memory-table.init.title" />
+						</th>
+						<th>
+							<wicket:message key="dashboard.systeminfo.memory-table.used.title" />
+						</th>
+						<th>
+							<wicket:message key="dashboard.systeminfo.memory-table.committed.title" />
+						</th>
+						<th>
+							<wicket:message key="dashboard.systeminfo.memory-table.max.title" />
+						</th>
+	    			</tr>
+	  			</thead>
+	  			<tbody>
+					<tr wicket:id="memory-instance-rows">
+						<td>
+							<div wicket:id="name" />
+						</td>
+						<td>
+							<div wicket:id="type" />
+						</td>
+						<td>
+							<div wicket:id="init" />
+						</td>
+						<td>
+							<div wicket:id="used" />
+						</td>
+						<td>
+							<div wicket:id="committed" />
+						</td>
+						<td>
+							<div wicket:id="max" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="clear: both; margin-top: 9px; white-space: pre-wrap;" class="dashboard">
+				<div wicket:id="systemproperty-tree-table" />
+			</div>
+		</wicket:panel>
+	</body>
+</html>

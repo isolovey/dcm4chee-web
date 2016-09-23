@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>HL7 v2 Send Service</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.hl7.v2.HL7SendV2Service</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>HL7SendV2Service</name>
+    </constructor>
+      
+   <attribute access="read-write"
+      getMethod="getReceiver"
+      setMethod="setReceiver">
+      <description><![CDATA[ HL7 Receiver(s) to which HL7 messages will be sent. <br/>
+      	format: &lt;application&gt;^&lt;Facility&gt; <br/>
+      	Use NONE to disable this service.]]>
+      </description>
+      <name>Receiver</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getSendingApplication"
+      setMethod="setSendingApplication">
+      <description>Sending Application in transmitted messages.
+      </description>
+      <name>SendingApplication</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getSendingFacility"
+      setMethod="setSendingFacility">
+      <description>Sending Facility in transmitted messages.
+      </description>
+      <name>SendingFacility</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getBindAddress"
+      setMethod="setBindAddress">
+      <description>Hostname/IP to specify local network interface for connection. NONE: use a valid local address.
+      </description>
+      <name>BindAddress</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getLinkMsgType"
+      setMethod="setLinkMsgType">
+      <description><![CDATA[Message type for linking MPPS to MWL.<br />
+      		Use NONE to disable ORM message after linking.<br />
+      		The Stylesheet can use 'linkType=LINK' parameter.
+      ]]></description>
+      <name>LinkMsgType</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="mpps2orm" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getUnlinkMsgType"
+      setMethod="setUnlinkMsgType">
+      <description><![CDATA[Message type for unlinking MPPS and MWL.<br />
+      		Use NONE to disable ORM message after unlink.<br />
+      		The Stylesheet can use 'linkType=UNLINK' parameter.
+      ]]></description>
+      <name>UnlinkMsgType</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="mpps2orm" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getConfigDir"
+      setMethod="setConfigDir">
+      <description><![CDATA[Directory where configuration (XSL) files for HL7Send service are located.
+      A relative path name is resolved relative to
+      <i>archive-install-directory</i>/server/default/.]]>  
+      </description>
+      <name>ConfigDirectory</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="conf/dcm4chee-hl7"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getXslFilenames"
+      setMethod="setXslFilenames">
+      <description><![CDATA[Mapping of MsgTypeID like pat_upd to a XSL URL to transform Dicom Dataset to an HL7 message.<br/>
+      	Format: &lt;msgTypeID&gt;:&lt;XSL URL/Name&gt;[|14] <br/>
+      	The optional postfix '|14' can be used to support stylesheets written for dcm4che14 xml format. <br/>
+      	XSL names that do not start with 'resource:' or 'file:' must be located in ConfigDirectory/[Receiver/] <br />
+      	In this case the stylesheet used will be choosen according the configured receiver. (see Template service:getTemplatesForAET)<br />
+      	<b>Warning:</b> Improper configuration may cause wrong results or prohibit associated actions.
+      	]]>
+      </description>
+      <name>XslFilenames</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+         	pat_upd=resource:xsl/pat_upd.xsl
+         	mpps2orm=mpps2orm.xsl|14" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getCharsetName"
+     setMethod="setCharsetName">
+      <description><![CDATA[Charset of HL7 messages.]]>
+      </description>
+      <name>CharsetName</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="ISO-8859-1" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getDcm2To14Tpl"
+      setMethod="setDcm2To14Tpl">
+      <description>Stylesheet to transform dcm4che2 formatted xml to dcm4che14 xml.
+      </description>
+      <name>Dcm2To14XSL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="resource:xsl/dcm2To14.xsl" />
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write" getMethod="getRetryIntervalls" setMethod="setRetryIntervalls">
+      <description>Number and intervals of retries for failed 
+      Instance Available or Study Content Notification requests. &lt;br&gt;Format:
+      &lt;br&gt;Comma separated list of &lt;i&gt;number&lt;/I&gt; x &lt;i&gt;interval&lt;/I&gt; pairs.
+      &lt;br&gt;The interval can be specified in seconds (##s),
+      minutes (##m), hours (##h) or days (##d).
+      &lt;br&gt;Example: 
+      &lt;br&gt;5x1m,10x10m means retry a total of 5 times, one minute
+      apart for each retry; then retry a total of 10 times, 10 minutes 
+      apart for each retry.
+      </description>
+      <name>RetryIntervals</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="2x1m,2x30m,24x1h,7x1d"/>
+      </descriptors>
+   </attribute>
+ 
+   <attribute access="read-write"
+      getMethod="isLogHL7Message"
+      setMethod="setLogHL7Message">
+      <description><![CDATA[Log HL7 message as file. (in &lt;log_dir&gt;/hl7send)]]>
+      </description>
+      <name>LogHL7Message</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isLogXMLHL7Message"
+      setMethod="setLogXMLHL7Message">
+      <description><![CDATA[Log HL7 message as file. (in &lt;log_dir&gt;/hl7send)]]>
+      </description>
+      <name>LogXMLHL7Message</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false" />
+      </descriptors>
+   </attribute>
+  
+   <attribute access="read-write"
+     getMethod="getAcceptTimeout"
+     setMethod="setAcceptTimeout">
+      <description>A-Associate accept timeout in milliseconds. 0 = no timeout.</description>
+      <name>AcceptTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="10000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getSocketCloseDelay"
+     setMethod="setSocketCloseDelay">
+      <description>Delay in ms for Socket close after sending A-ABORT.
+      </description>
+      <name>SocketCloseDelay</name>
+      <type>int</type>
+      <descriptors>
+         <value value="50"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write" 
+     getMethod="getQueueName"
+     setMethod="setQueueName">
+      <description>Used internally. Do not modify.</description>
+      <name>QueueName</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="HL7SendV2" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write" getMethod="getConcurrency" setMethod="setConcurrency">
+      <description>Maximum number of concurrent sent notifications.
+      </description>
+      <name>Concurrency</name>
+      <type>int</type>
+      <descriptors>
+         <value value="1"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTlsCfgServiceName"
+      setMethod="setTlsCfgServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>TlsCfgServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getJmsServiceName"
+      setMethod="setJmsServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>JMSServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getContentEditServiceName"
+      setMethod="setContentEditServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>ContentEditServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write" 
+      getMethod="getTemplatesServiceName"
+      setMethod="setTemplatesServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>TemplatesServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+   <operation impact="ACTION">
+      <description><![CDATA[ Schedule a Patient Update HL7 Message.
+      		]]> </description>
+      <name>schedulePatientUpdate</name>
+      <parameter>
+        <description>Dicom Object with Patient Attributes.</description>
+        <name>patAttrs</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Schedule a Patient Merge HL7 Message.
+      		]]> </description>
+      <name>schedulePatientMerge</name>
+      <parameter>
+        <description>Dicom Object with Patient Attributes of dominant Patient.</description>
+        <name>dominantPatAttrs</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description>Array of Dicom Object with Patient Attributes of prior Patients.</description>
+        <name>dominantPatAttrs</name>
+        <type>[Lorg.dcm4che2.data.DicomObject;</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Schedule a ORM HL7 Message with information of MPPS attributes after MPPS to MWL linking.
+      		]]> </description>
+      <name>scheduleMPPS2ORM</name>
+      <parameter>
+        <description>Result of linking MPPS to MWL. Only MPPS attributes will be used.</description>
+        <name>linkResult</name>
+        <type>org.dcm4chee.web.dao.vo.MppsToMwlLinkResult</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Schedule a ORM HL7 Message with information of given MPPS attributes.
+      		]]> </description>
+      <name>scheduleMPPS2ORM</name>
+      <parameter>
+        <description>Dicom Object with Patient Attributes.</description>
+        <name>mppsAttrs</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Schedule a HL7 Message of given type to all configured receiver.
+      		]]> </description>
+      <name>scheduleHL7Message</name>
+      <parameter>
+        <description>Dicom Object that will be transformed to a HL7 message..</description>
+        <name>dicomObject</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description>XSL Parameter.</description>
+        <name>parameter</name>
+        <type>java.util.Map</type>
+      </parameter>
+      <parameter>
+        <description>Message Type ID.</description>
+        <name>msgTypeID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Show HL7 Message for a DICOM file and messageTypeID.
+      		]]> </description>
+      <name>showDcmFileAsHL7Msg</name>
+      <parameter>
+        <description>Filename of a DICOM File.</description>
+        <name>dcmFile</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Receiver. default: 1st configured receiver or TEST^TEST.</description>
+        <name>receiver</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Message Type ID.</description>
+        <name>msgTypeID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>java.lang.String</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Send HL7 Message of given file to a receiver.
+      		]]> </description>
+      <name>sendHL7File</name>
+      <parameter>
+        <description>Receiver. default: 1st configured receiver.</description>
+        <name>receiver</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Name of a HL7 File</description>
+        <name>filename</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>boolean</return-type>
+   </operation>
+
+</mbean>

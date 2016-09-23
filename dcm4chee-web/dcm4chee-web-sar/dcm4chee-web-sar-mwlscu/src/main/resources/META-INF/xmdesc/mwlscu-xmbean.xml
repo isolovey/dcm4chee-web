@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+    <description><![CDATA[<b>Modality Worklist (MWL) SCU Service</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.mwl.MwlScuService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>MwlScuService</name>
+    </constructor>
+      
+   <attribute access="read-write"
+      getMethod="getCallingAET"
+      setMethod="setCallingAET">
+      <description>Calling AE title of the Mwl SCU to send MWL C-FIND request.
+      </description>
+      <name>CallingAETitle</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getWorklistProviders"
+      setMethod="setWorklistProviders">
+      <description><![CDATA[AE title(s) separated by '\' of MWL C-FIND SCPs (worklist provider). <br />
+      		These AE's are used as selection option in MWL search dialog.<br />
+      		Use NONE to disable external worklist providers in MWL search dialog.
+      ]]></description>
+      <name>WorklistProviders</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getDefaultWorklistProvider"
+      setMethod="setDefaultWorklistProvider">
+      <description><![CDATA[Default worklist provider used in MWL search dialog.<br />
+      	Use <intern> for internal DB query.
+      ]]></description>
+      <name>DefaultWorklistProvider</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="&lt;intern&gt;" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="isBindToCallingAET"
+      setMethod="setBindToCallingAET">
+      <description>Bind socket to address of CallingAET.
+      </description>
+      <name>BindToCallingAET</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write" getMethod="getPriority" setMethod="setPriority">
+      <description>Priority used in MWL C-FIND requests.
+      Enumerated Values: LOW, MEDIUM, HIGH.
+      </description>
+      <name>Priority</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="MEDIUM"/>
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write"
+     getMethod="getConnectTimeout"
+     setMethod="setConnectTimeout">
+      <description>Connection timeout in ms. 0 = no timeout</description>
+      <name>ConnectTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="0"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getAcceptTimeout"
+     setMethod="setAcceptTimeout">
+      <description>A-Associate accept timeout in milliseconds. 0 = no timeout.</description>
+      <name>AcceptTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="10000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write" 
+     getMethod="getDimseRspTimeout"
+     setMethod="setDimseRspTimeout">
+      <description>Timeout in milliseconds for receiving DIMSE-RSP for an open C-FIND request. 0 = no timeout.
+      </description>
+      <name>DimseRspTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="60000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getReleaseTimeout"
+     setMethod="setReleaseTimeout">
+      <description>Timeout in ms for receiving A-RELEASE-RP.
+      </description>
+      <name>ReleaseTimeout</name>
+      <type>int</type>
+      <descriptors>
+         <value value="5000"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+     getMethod="getSocketCloseDelay"
+     setMethod="setSocketCloseDelay">
+      <description>Delay in ms for Socket close after sending A-ABORT.
+      </description>
+      <name>SocketCloseDelay</name>
+      <type>int</type>
+      <descriptors>
+         <value value="50"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMaxPDULengthReceive"
+      setMethod="setMaxPDULengthReceive">
+      <description>Maximum protocol data unit (PDU) package length for receiving PDUs.
+      </description>
+      <name>MaximumPDULengthReceive</name>
+      <type>int</type>
+      <descriptors>
+         <value value="16352"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMaxOpsInvoked"
+      setMethod="setMaxOpsInvoked">
+      <description>Maximum number of outstanding operations this MOVE SCU will invoke on one Association. 0 = no limit
+      </description>
+      <name>getMaxOpsInvoked</name>
+      <type>int</type>
+      <descriptors>
+         <value value="0"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTcpNoDelay"
+      setMethod="setTcpNoDelay">
+      <description>Send packets as quickly as possible (Disable Nagle's algorithmn).
+      </description>
+      <name>TcpNoDelay</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getTlsCfgServiceName"
+      setMethod="setTlsCfgServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>TlsCfgServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+
+   <operation impact="ACTION">
+      <description>Get AETs of worklist providers as list.</description>
+      <name>getWorklistProviderList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description>Send a MWL C-FIND request to given AE.</description>
+      <name>queryMWL</name>
+      <parameter>
+        <description>AET of MWL C-FIND SCP</description>
+        <name>aet</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>DicomObject with MWL C-FIND request attributes</description>
+        <name>searchDS</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description><![CDATA[limit number of results (values &lt; 1 means no limit)]]></description>
+        <name>maxResults</name>
+        <type>int</type>
+      </parameter>
+      <parameter>
+        <description>Complement searchDS with all possible return attributes</description>
+        <name>complementAll</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>java.util.List</return-type>
+   </operation>
+
+</mbean>

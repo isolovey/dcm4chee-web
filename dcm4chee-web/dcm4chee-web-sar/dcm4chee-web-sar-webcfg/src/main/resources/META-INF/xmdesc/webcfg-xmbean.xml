@@ -1,0 +1,1364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>Web3 Configuration Service</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.webcfg.WebCfgService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>WebCfgService</name>
+    </constructor>
+
+   <attribute access="read-write"
+      getMethod="getWebConfigPath"
+      setMethod="setWebConfigPath">
+      <description><![CDATA[
+        Configuration Path for web specific config files.<br/>
+        A relative path name is resolved relative to archive-install-directory/server/default/.]]>
+      </description>
+      <name>WebConfigPath</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="conf/dcm4chee-web3"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getDicomSecurityServletUrl"
+      setMethod="setDicomSecurityServletUrl">
+      <description><![CDATA[
+        URL for the dicom security servlet 
+        for web container based sso authentication.]]>
+      </description>
+      <name>dicomSecurityServletUrl</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="http://localhost:8080/dcm4chee-web3-dicom/dicom-security-servlet"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWadoBaseURL"
+      setMethod="setWadoBaseURL">
+      <description><![CDATA[
+        WADO Base URL if WADO Service is not in the same WEB container.<br/>
+        NONE: WADO service is in same container.]]>
+      </description>
+      <name>WadoBaseURL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getRIDBaseURL"
+      setMethod="setRIDBaseURL">
+      <description><![CDATA[
+        Retrieve Information for Display Base URL if RID Service is not in the same WEB container.<br/>
+        NONE: RID service is in same container.]]>
+      </description>
+      <name>RIDBaseURL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getArrURL"
+      setMethod="setArrURL">
+      <description><![CDATA[
+        URL for the location of the Audit Record Repository's xml service <br/> 
+        used to retireve and display entries in the folder.]]>
+      </description>
+      <name>arrURL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="http://localhost:8080/dcm4chee-arr/xml"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-only" getMethod="getInstalledWebViewer" >
+      <description>Name(s) of installed WebViewer</description>
+      <name>InstalledWebViewer</name>
+      <type>java.lang.String</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWebviewerNames"
+      setMethod="setWebviewerNames">
+      <description><![CDATA[
+        Name(s) of WebViewer that is used to view Dicom Objects separated by newline.<br/>
+        If more than one name is configured, the WebViewer link will open a selection of these WebViewers.<br />
+        NONE: Do not show WebViewer link in folder.<br />
+        ANY:  All installed WebViewers.]]>
+      </description>
+      <name>WebviewerNames</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWebviewerBaseUrls"
+      setMethod="setWebviewerBaseUrls">
+      <description><![CDATA[
+        Base URLs to open WebViewer separated by newline.<br/>
+        Format: &lt;webviewer name&gt;:&lt;baseURL&gt;<br />
+        NONE: All webviewer use their default URL]]>
+      </description>
+      <name>WebviewerBaseUrls</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getPatientIDPattern"
+      setMethod="setPatientIDPattern">
+      <description><![CDATA[
+        Pattern for generated patient ID's.<br/>
+        {##...#}..Numeric timestamp (milliseconds since 1.1.1970)<br />
+        {&lt;Date format&gt;}..Format string y..year,M..month,d..day,H..hour,m..minute,s..second,S..milliseconds<br />
+        e.g: PACS-{yyMMddHHmmss}]]>
+      </description>
+      <name>PatientIDPattern</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="PACS-{#############}"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getIssuerOfPatientID"
+      setMethod="setIssuerOfPatientID">
+      <description><![CDATA[Issuer of generated patient ID's.<br/>]]>
+      </description>
+      <name>IssuerOfPatientID</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE"/>
+      </descriptors>
+   </attribute>
+      
+   <attribute access="read-write"
+      getMethod="getDefaultLanguage"
+      setMethod="setDefaultLanguage">
+      <description><![CDATA[Default language (en, en_GB, de, ..) after login.<br/>
+      	NONE: Use last used or browser language.
+      ]]></description>
+      <name>DefaultLanguage</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+      
+   <attribute access="read-write"
+      getMethod="getImageCUIDS"
+      setMethod="setImageCUIDS">
+      <description><![CDATA[
+        List of image SOP Classes.
+        Use either the SOP Class UID value, or the name specified in 
+        DICOM Part 6, Annex A Registry of DICOM unique identifiers,
+        concatenating individual words without spaces.]]>
+      </description>
+      <name>ImageSOPClasses</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           BreastTomosynthesisImageStorage
+           ComputedRadiographyImageStorage
+           DigitalXRayImageStorageForPresentation
+           DigitalXRayImageStorageForProcessing
+           DigitalMammographyXRayImageStorageForPresentation
+           DigitalMammographyXRayImageStorageForProcessing
+           DigitalIntraOralXRayImageStorageForPresentation
+           DigitalIntraOralXRayImageStorageForProcessing
+           CTImageStorage
+           EnhancedCTImageStorage
+           UltrasoundMultiFrameImageStorage
+           MRImageStorage
+           EnhancedMRImageStorage
+           UltrasoundImageStorage
+           SecondaryCaptureImageStorage
+           MultiFrameSingleBitSecondaryCaptureImageStorage
+           MultiFrameGrayscaleByteSecondaryCaptureImageStorage
+           MultiFrameGrayscaleWordSecondaryCaptureImageStorage
+           MultiFrameTrueColorSecondaryCaptureImageStorage
+           XRayAngiographicImageStorage
+           EnhancedXAImageStorage
+           XRayRadiofluoroscopicImageStorage
+           EnhancedXRFImageStorage
+           NuclearMedicineImageStorage
+           VLEndoscopicImageStorage
+           VLMicroscopicImageStorage
+           VLSlideCoordinatesMicroscopicImageStorage
+           VLPhotographicImageStorage
+           OphthalmicPhotography8BitImageStorage
+           OphthalmicPhotography16BitImageStorage
+           PositronEmissionTomographyImageStorage
+           RTImageStorage
+           HardcopyGrayscaleImageStorageSOPClassRetired
+           HardcopyColorImageStorageSOPClassRetired
+           NuclearMedicineImageStorageRetired
+           UltrasoundMultiFrameImageStorageRetired
+           UltrasoundImageStorageRetired
+           XRayAngiographicBiPlaneImageStorageRetired
+           VLImageStorageTrialRetired
+           VLMultiFrameImageStorageTrialRetired
+           "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getVideoCUIDS"
+      setMethod="setVideoCUIDS">
+      <description><![CDATA[
+        List of Video SOP Classes.
+        Use either the SOP Class UID value, or the name specified in 
+        DICOM Part 6, Annex A Registry of DICOM unique identifiers,
+        concatenating individual words without spaces.]]>
+      </description>
+      <name>VideoSOPClasses</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           VideoEndoscopicImageStorage
+           VideoMicroscopicImageStorage
+           VideoPhotographicImageStorage"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWaveformCUIDS"
+      setMethod="setWaveformCUIDS">
+      <description><![CDATA[
+        List of Waveform SOP Classes.
+        Use either the SOP Class UID value, or the name specified in 
+        DICOM Part 6, Annex A Registry of DICOM unique identifiers,
+        concatenating individual words without spaces.]]>
+      </description>
+      <name>WaveformSOPClasses</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           TwelveLeadECGWaveformStorage
+           GeneralECGWaveformStorage
+           AmbulatoryECGWaveformStorage
+           HemodynamicWaveformStorage
+           CardiacElectrophysiologyWaveformStorage
+           BasicVoiceAudioWaveformStorage
+           "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getSrCUIDS"
+      setMethod="setSrCUIDS">
+      <description><![CDATA[
+        List of Structured Report Document SOP Classes.
+        Use either the SOP Class UID value, or the name specified in 
+        DICOM Part 6, Annex A Registry of DICOM unique identifiers,
+        concatenating individual words without spaces.]]>
+      </description>
+      <name>SRSOPClasses</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           BasicTextSRStorage
+           EnhancedSRStorage
+           ComprehensiveSRStorage
+           ProcedureLogStorage
+           MammographyCADSRStorage
+           KeyObjectSelectionDocumentStorage
+           ChestCADSRStorage
+           XRayRadiationDoseSRStorage
+           "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getPsCUIDS"
+      setMethod="setPsCUIDS">
+      <description><![CDATA[
+        List of Presentation State SOP Classes.
+        Use either the SOP Class UID value, or the name specified in 
+        DICOM Part 6, Annex A Registry of DICOM unique identifiers,
+        concatenating individual words without spaces.]]>
+      </description>
+      <name>PSSOPClasses</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           GrayscaleSoftcopyPresentationStateStorageSOPClass
+           ColorSoftcopyPresentationStateStorageSOPClass
+           PseudoColorSoftcopyPresentationStateStorageSOPClass
+           BlendingSoftcopyPresentationStateStorageSOPClass
+           XAXRFGrayscaleSoftcopyPresentationStateStorage
+           "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getEncapsulatedCUIDS"
+      setMethod="setEncapsulatedCUIDS">
+      <description><![CDATA[
+        List of Encapsulated Document SOP Classes.
+        Use either the SOP Class UID value, or the name specified in 
+        DICOM Part 6, Annex A Registry of DICOM unique identifiers,
+        concatenating individual words without spaces.]]>
+      </description>
+      <name>EncapsulatedCUIDS</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           EncapsulatedPDFStorage
+           EncapsulatedCDAStorage
+           "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getRIDMimeTypes"
+      setMethod="setRIDMimeTypes">
+      <description><![CDATA[List of mime types for RID retrieve grouped by SOP Class UID groups.<br/>
+      	Format: &lt;grp&gt;:&lt;mimeType&gt;[|&lt;mimeType&gt;[|...]]<br/>
+      	<dl><dt>Following group names can be used:</dt>
+      	<dd>SR :   Structured Report SOP Class UIDs</dd>
+      	<dd>ECG:   Waveform SOP Class UIDs</dd>
+      	<dd>DOC:   Encapsulated Document Storage SOP Class UIDs  </dd>
+      	</dl>
+      ]]></description>
+      <name>RIDMimeTypes</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+         	SR:application/pdf
+         	ECG:application/pdf|image/svg+xml
+         	DOC:application/pdf
+         	"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getWindowSizeConfig"
+      setMethod="setWindowSizeConfig">
+      <description><![CDATA[Window size configuration of modal windows.<br/>
+      	Format: &lt;name&gt;:&lt;width&gt;x&lt;height&gt;<br/>
+      	<dl><dt>Following window names can be used:</dt>
+      	<dd>default:   default size</dd>
+		<dd>arr:    ARR window in Folder and Trash</dd>
+      	<dd>export:    Export window in Folder</dd>
+      	<dd>dcmEdit:   Dicom Edit window in Folder</dd>
+      	<dd>dcmFileDisplay:   Dicom object from file window in Folder</dd>
+      	<dd>addStudy:  Add new Study window in Folder</dd>
+      	<dd>addSeries: Add new Series window in Folder</dd>
+      	<dd>imgSelect: Image selection window</dd>
+      	<dd>wado:      WADO image window</dd>
+      	<dd>aeEdit:    Edit window in AE Managment</dd>
+      	<dd>mpps2mwl:  MPPS to MWL link window</dd>
+      	<dd>linkToOld: MPPS to MWL 'Too old' confirmation window</dd>
+      	<dd>move:      Move Entities Window</dd>
+      	<dd>studyPerm: Study Permission window in Folder</dd>
+        <dd>addUser: Add user in User Management</dd>
+        <dd>changePassword: Change password in User Management</dd>
+        <dd>manageRoles: Manage roles in User Management</dd>
+        <dd>editRole: New role and edit role in User Management</dd>
+        <dd>webPermissions: Web permissions in User Management</dd>
+        <dd>aetGroupAssignment: AET Group assignment in User Management</dd>
+        <dd>typeAssignment: Type assignment in User Management</dd>
+        <dd>editGroup: Edit group in User Management</dd>
+        <dd>editAETGroup: Edit AET group in User Management</dd>
+        <dd>aetAssignment: Assign AETs to AET group in User Management</dd>
+        <dd>createGroup:   Create report group window in Dashboard</dd>
+        <dd>reportDiagram:   size of the report diagram window</dd>
+        <dd>reportDiagramImage:   size of the diagram image</dd>
+        <dd>reportTable:   size of the report table window</dd>
+        <dd>reportDiagramandtable:   size of the window displaying both diagram image and report table</dd>
+      ]]></description>
+      <name>WindowSizeConfig</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+         	default:800x600
+         	arr:1024x768
+         	export:650x500
+         	aeEdit:960x700
+         	mwEdit:1024x768
+         	mpps2mwl:1124x600
+         	linkToOld:480x200
+         	move:900x320
+            addUser:400x300
+            changePassword:400x300
+            manageRoles:300x700
+            editRole:570x350
+            webPermissions:300x700
+            aetGroupAssignment:300x700
+            typeAssignment:300x700
+            editGroup:600x350
+            createGroup:400x300
+            editReport:850x500
+            aetAssignment:300x700
+            reportDiagram:1024x768
+            reportDiagramImage:800x600
+            reportTable:1024x768
+            reportDiagramandtable:1024x768
+         	"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getModalities"
+      setMethod="setModalities">
+      <description><![CDATA[List of modalities.<br/>
+      	Format: &lt;Modality&gt;[|&lt;Modality&gt[|..]]<br/>
+      	NONE is used for an empty list. In this case a getModalityList will trigger updateModalities.
+      ]]></description>
+      <name>Modalities</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isAutoUpdateModalities"
+      setMethod="setAutoUpdateModalities">
+      <description><![CDATA[Enable auto update of Modality list at midnight (23:59:59).
+      ]]></description>
+      <name>AutoUpdateModalities</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getAETTypes"
+      setMethod="setAETTypes">
+      <description><![CDATA[List of AET Types.<br/>
+      	Format: &lt;AET Type&gt;[|&lt;AET Type&gt[|..]]<br/>
+      	EMPTY can be used to allow AE's without AET Type.
+      ]]></description>
+      <name>aetTypes</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="-"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getAEManagementDefault"
+      setMethod="setAEManagementDefault">
+      <description><![CDATA[Default to be shown in the AE Management list.<br/>
+        ANY: Display all AETs after opening AE Management<br/>
+        NONE: Do not display any AET after opening AE Management
+        On other entries, the given is selected as a type in the "Filter by" dropdown list.
+      ]]></description>
+      <name>aeManagementDefault</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="ANY"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getStationNames"
+      setMethod="setStationNames">
+      <description><![CDATA[List of Station AETs.<br/>
+      	Format: &lt;AET&gt;[|&lt;AET&gt[|..]]<br/>
+      	NONE is used for an empty list. In this case a getStationNameList will trigger updateStationNames.
+      ]]></description>
+      <name>StationNames</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isAutoUpdateStationNames"
+      setMethod="setAutoUpdateStationNames">
+      <description><![CDATA[Enable auto update of Station Name list at midnight(23:59:59).
+      ]]></description>
+      <name>AutoUpdateStationNames</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isAutoUpdateDicomRoles"
+      setMethod="setAutoUpdateDicomRoles">
+      <description><![CDATA[Enable auto update of Dicom Roles from study permission table at midnight(23:59:59).
+      ]]></description>
+      <name>AutoUpdateDicomRoles</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getAutoExpandLevelChoices"
+      setMethod="setAutoExpandLevelChoices">
+      <description><![CDATA[List of Choices for 'Expand to' drop down box.<br/>
+      	Possible values: auto, Patient, Study, Series, Instance<br/>
+      ]]></description>
+      <name>AutoExpandLevelChoices</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="auto;Patient;Study;Series"/>
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write"
+      getMethod="getAutoWildcard"
+      setMethod="setAutoWildcard">
+      <description><![CDATA[AutoWildcard specify if text of search fields should be automatically extended by '*'.<br/>
+      	<dl><dt>Possible values:</dt>
+      	 <dd>0...Disabled</dd>
+      	 <dd>1...Only patient name</dd>
+      	 <dd>2...All 'wildcard' search fields</dd>
+      	</dl><br/>
+      	Note: <br/>Also used for fuzzy (phonetic) search if supported.<br/>
+      	NOT used in single patient name fields (useFamilyAndGivenNameQueryFields=false)!
+      ]]></description>
+      <name>AutoWildcard</name>
+      <type>int</type>
+      <descriptors>
+         <value value="1"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getPagesizes"
+      setMethod="setPagesizes">
+      <description><![CDATA[List of Pagesizes.<br/>
+      	This list is used in folder and worklist console to provide a choice how many results are shown in one page.
+      ]]></description>
+      <name>Pagesizes</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+         	10
+         	25
+         	50
+         	100
+			"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getDefaultFolderPagesize"
+      setMethod="setDefaultFolderPagesize">
+      <description>Default pagesize in folder.</description>
+      <name>DefaultFolderPagesize</name>
+      <type>int</type>
+      <descriptors>
+         <value value="10"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getDefaultMWLPagesize"
+      setMethod="setDefaultMWLPagesize">
+      <description>Default pagesize in worklist console.</description>
+      <name>DefaultMWLPagesize</name>
+      <type>int</type>
+      <descriptors>
+         <value value="10"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isQueryAfterPagesizeChange"
+      setMethod="setQueryAfterPagesizeChange">
+      <description>If enabled a query will be initiated when the page size has changed.</description>
+      <name>QueryAfterPagesizeChange</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="isUseFamilyAndGivenNameQueryFields"
+      setMethod="setUseFamilyAndGivenNameQueryFields">
+      <description><![CDATA[Enable query of Patient Name with separate family and given name fields.<br/>
+      		If disabled the query for patient name components is 
+      		'&lt;familyname&gt;^&lt;givenname&lt;^&lt;middlename&lt;^&lt;prefix&lt;^&lt;suffix&lt;^&lt;degree&lt;.
+      ]]></description>
+      <name>useFamilyAndGivenNameQueryFields</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write"
+      getMethod="isDefaultHidePPS"
+      setMethod="setDefaultHidePPS">
+      <description><![CDATA[Default value for 'Hide PPS'.<br/>
+      		Note: The user must have the right 'HidePPSLevel' to use this feature.
+      ]]></description>
+      <name>DefaultHidePPS</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="isDefaultLatestStudiesFirst"
+      setMethod="setDefaultLatestStudiesFirst">
+      <description>Default value for 'Latest Studies first' option in folder.</description>
+      <name>DefaultLatestStudiesFirst</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="isDefaultLatestMwlItemsFirst"
+      setMethod="setDefaultLatestMwlItemsFirst">
+      <description>Default value for 'Latest items first' option in Modality Worklist panel.</description>
+      <name>DefaultLatestMwlItemsFirst</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="isForcePatientExpandableForPatientQuery"
+      setMethod="setForcePatientExpandableForPatientQuery">
+      <description><![CDATA[Force that patients are expandable after patient query.<br/>
+      		true...Avoid additional queries (count studies for patient)<br />
+      		false..Patients are only expandable if patient has at least one viewable study. 
+      ]]></description>
+      <name>forcePatientExpandableForPatientQuery</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getPresetStudyDate"
+      setMethod="setPresetStudyDate">
+      <description><![CDATA[Preset Value of Study Date searchfields in folder.<br/>
+      	Format: NONE or n days before current date<br/>
+      	If n is given the date range is currentDay-n to currentDay, 0 means only current day.
+      ]]></description>
+      <name>PresetStudyDate</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMpps2mwlPresetPatientname"
+      setMethod="setMpps2mwlPresetPatientname">
+      <description><![CDATA[Preset Value of Patient name searchfiled in MPPS to MWL Link dialog.<br/>
+      	<dl><dt>The value can be:</dt>
+      	<dd>delete...Delete the input field.</dd>
+      	<dd>*........Use full patient name of MPPS.</dd>
+      	<dd>&lt;num&gt;....Number of leading chars of MPPS patient name. (e.g. 3: 'Caliskan' --&gt; 'Cal')</dd></dl> 
+      ]]></description>
+      <name>Mpps2mwlPresetPatientname</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="3"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMpps2mwlPresetModality"
+      setMethod="setMpps2mwlPresetModality">
+      <description><![CDATA[Preset Value of Modality searchfiled in MPPS to MWL Link dialog.<br/>
+      	<dl><dt>The value can be:</dt>
+      	<dd>delete...Delete the input field.</dd>
+      	<dd>mpps.....Modality of MPPS.</dd>
+      ]]></description>
+      <name>Mpps2mwlPresetModality</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="mpps"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMpps2mwlPresetStartDate"
+      setMethod="setMpps2mwlPresetStartDate">
+      <description><![CDATA[Preset Value of Start Date searchfiled in MPPS to MWL Link dialog.<br/>
+      	<dl><dt>The value can be:</dt>
+      	<dd>delete..........................Delete the input field.</dd>
+      	<dd>mpps[(startOffset,endOffset)]...Use day of startdate of MPPS.</dd>
+      	<dd>today[(startOffset,endOffset]...Use current day.</dd>
+      	</dl>
+      	The optional (startOffset,endOffset) can be used to extend/move the search date range.<br />
+      	e.g. mpps(-1,2): Date range is: one day before PPS Start date and 2 days after.<br />
+      	'today(0,1)': Date range is: current day and next day.<br />
+      	Note: dont use + for positive numbers!
+      ]]></description>
+      <name>Mpps2mwlPresetStartDate</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="mpps"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isMpps2mwlAutoQuery"
+      setMethod="setMpps2mwlAutoQuery">
+      <description><![CDATA[Enable auto query if MPPS Link dialog is opened.
+      ]]></description>
+      <name>Mpps2mwlAutoQuery</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTCForumIntegrationType"
+      setMethod="setTCForumIntegrationType">
+      <description><![CDATA[
+      	Specifies the type of thirdparty forum software that shall be used.
+      	Supported values are JForum or NONE.
+      ]]></description>
+      <name>TCForumIntegrationType</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>   
+   <attribute access="read-write"
+      getMethod="getTCSeriesDisplayFormat"
+      setMethod="setTCSeriesDisplayFormat">
+      <description><![CDATA[
+        Conversion format that is going to be used to textually display series in the image viewer.
+        The format may contain any dicom qualifiers which are going to be converted into the value
+        of the corresponding dicom tag. A qualifier needs to follow the syntax $(tagname), where tagname
+        is the name of a dicom tag on series or study level, e.g.<br/><br/>
+        $(StudyDescription)|$(SeriesDescription)<br/><br/>
+        Special tagnames are:<br/>
+        ImageCount (i.e number of all images of the series)<br/>
+        NumberOfSeries (i.e the consecutive number of the series within the study)<br/>
+        NumberOfStudy (i.e the consecutive number of the study within the list of displayed studies)<br/>
+      ]]></description>
+      <name>TCSeriesDisplayFormat</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="$(StudyDescription) | $(SeriesDescription) ($(ImageCount))"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTCRestrictedSourceAETs"
+      setMethod="setTCRestrictedSourceAETs">
+      <description><![CDATA[List of source AETs for matching teaching-files.<br/>
+        Format: &lt;AET&gt;[|&lt;AET&gt[|..]]<br/>
+        NONE is used for an empty list.
+      ]]></description>
+      <name>TCRestrictedSourceAETs</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTCEthnicGroups"
+      setMethod="setTCEthnicGroups">
+      <description><![CDATA[List of possible ethnic groups.<br/>
+        Each ethnic group must be written into a new line.<br/>
+        NONE is used for an empty list.
+      ]]></description>
+      <name>TCEthnicGroups</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+         NONE
+         "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTCKeywordCataloguesPath"
+      setMethod="setTCKeywordCataloguesPath">
+      <description><![CDATA[
+        Optional configurable path to custom keyword catalogue definition files.<br/>
+        A non-absolute path is resolved relative to the archive-install-directory, i.e '/server/default/'.]]>
+      </description>
+      <name>TCKeywordCataloguesPath</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTCKeywordCatalogues"
+      setMethod="setTCKeywordCatalogues">
+      <description><![CDATA[
+        List of teaching-file attributes with associated keyword catalogues.<br/>
+        <br/>
+        Each listed teaching-file attribute uses it's own associated keyword catalogue
+        in order to provide smart lookup for a specific keyword value when searching for
+        teaching-files. Further, you may wish to configure exclusive/non-exclusive usage
+        of a keyword-catalogue (exclusive=no free-text input is possible; non-exclusive=
+        additional free-text input is possible). Note: The only keyword catalogue that 
+        currently comes out-of-the-box with web3 is ACR! <br/>
+        <br/>
+        Each entry needs to conform to the following syntax (catalogueVersion is optional):<br/>
+        <br/>
+        Attribute ':' catalogueDesignatorId ',' catalogueId ',' catalogueVersion ',' exlusive?(true|false) <br/>
+        <br/>
+        Supported attributes are:<br/>
+        <ul>
+            <li>Keyword</li>
+            <li>Anatomy</li>
+            <li>Pathology</li>
+            <li>Diagnosis</li>
+            <li>DifferentialDiagnosis</li>
+            <li>Finding</li>
+        </ul>
+            <br/>
+            <br/>
+        For example: "Keyword:ACR,ACR,true"
+        ]]>
+      </description>
+      <name>TCKeywordCatalogues</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           Keyword:ACR,ACR
+           "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTCRestrictedAttributes"
+      setMethod="setTCRestrictedAttributes">
+      <description><![CDATA[
+        List of teaching-file attributes which are hidden in<br/>
+        1) the modal teaching-file dialog and the teaching-file details view, if
+        training mode is on.<br/>
+        2) the bookmarkable teaching-file case page, unless the authenticated
+        user has been assigned the 'Teaching-Files: View All Attributes' permission.<br/>
+        <br/>
+        Possible values/attributes are: Title, Abstract, AcquisitionModality,
+        Anatomy, AuthorAffiliation, AuthorContact, AuthorName, Category, Diagnosis,
+        DifferentialDiagnosis, Remarks, Discussion, Finding, History, Level, OrganSystem,
+        Pathology, PatientAge, PatientSex, PatientSpecies, BibliographicReference,
+        Documents, Links, Images. 
+        A value of NONE means, that ALL attributes are available/visible to anybody, 
+        regardless of training mode or permission.
+        ]]>
+      </description>
+      <name>TCRestrictedAttributes</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="
+           Title;
+           Abstract;
+           Anatomy;
+           Diagnosis;
+           DifferentialDiagnosis;
+           Remarks;
+           Discussion;
+           Finding;
+           OrganSystem;
+           Pathology
+           "/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTCEditOnDoubleClick"
+      setMethod="setTCEditOnDoubleClick">
+      <description><![CDATA[
+      Specifies, which action should be taken when the user double-clicks on a teaching-file.</br>
+      If false, the teaching-file is just opened for viewing (i.e not editable).</br>
+      If true, the teaching-file is opened for editing, assuming the user has the
+      privilege to edit teaching-files. If not, the teaching-file is just opened for viewing.
+      ]]></description>
+      <name>TCEditOnDoubleClick</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTCShowImagesInDialogEnabled"
+      setMethod="setTCShowImagesInDialogEnabled">
+      <description><![CDATA[
+      Specifies whether the images view panel is shown in the view/edit dialog or not.
+      By default, this setting is true and the images view panel is displayed. However,
+      if the majority of TF have man referenced images, it may make sense to set this 
+      to false in order to reduce the time it takes to display the dialog.
+      ]]></description>
+      <name>TCShowImagesInDialog</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTCMultipleKeywordSearchEnabled"
+      setMethod="setTCMultipleKeywordSearchEnabled">
+      <description><![CDATA[
+      If true, searching for multiple keywords is enabled: This means that<br>
+      1) the user is able to specify/select multiple keyword search strings or codes<br>
+      2) a teaching-file is in the search result set, if it contains one (OR-concatenation)<br>
+      or all (AND-concatenation) specified<br> keyword strings/codes. The type of concatenation<br>
+      used can be configured with the 'TCMultipleKeywordORConcat' setting.
+      <br>
+      By default, searching for multiple keywords is disabled.
+      ]]></description>
+      <name>TCMultipleKeywordSearch</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTCMultipleKeywordORConcatEnabled"
+      setMethod="setTCMultipleKeywordORConcatEnabled">
+      <description><![CDATA[
+      If true, searching for multiple keywords uses an OR-concatenation: A teaching-file
+      is in the search result set, if at least one search keyword matches. If false, an
+      AND-concatenation is used. In this case a teaching-file is the search result set just
+      if ALL search keywords matches the keywords of the teaching-file. By default, OR-concatenation
+      is used. This setting is ignored, if TCMultipleKeywordSearch is set to false.
+      ]]></description>
+      <name>TCMultipleKeywordORConcat</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isReadingRoom"
+      setMethod="setReadingRoom">
+      <description><![CDATA[
+      If true, use 'Reading Room' as default style which is used if browser/user open web the first time.<br/>
+      Afterwards, style changes are stored in session cookie for subsequent page requests.
+      ]]></description>
+      <name>ReadingRoom</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+      <attribute access="read-write"
+      getMethod="isShowDoneDialogAfterAction"
+      setMethod="setShowDoneDialogAfterAction">
+      <description><![CDATA[Enable 'done' dialog after actions like delete,... are done successfully.
+      ]]></description>
+      <name>ShowDoneDialogAfterAction</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMoveScuServiceName"
+      setMethod="setMoveScuServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>moveScuServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.web:service=MoveScu"/>
+      </descriptors>
+   </attribute>
+      <attribute access="read-write"
+      getMethod="getTCStoreScuServiceName"
+      setMethod="setTCStoreScuServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>tcStoreScuServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.web:service=TCStoreScu"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getAEServiceName"
+      setMethod="setAEServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>aeServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.archive:service=AE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getEchoServiceName"
+      setMethod="setEchoServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>echoServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.web:service=EchoService"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getContentEditServiceName"
+      setMethod="setContentEditServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>contentEditServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.web:service=ContentEditService"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getStoreBridgeServiceName"
+      setMethod="setStoreBridgeServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>storeBridgeServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.web:service=StoreBridge"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMppsEmulatorServiceName"
+      setMethod="setMppsEmulatorServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>mppsEmulatorServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.archive:service=MPPSEmulator"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMwlScuServiceName"
+      setMethod="setMwlScuServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>mwlScuServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.web:service=Web3MwlSCU"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTarRetrieveServiceName"
+      setMethod="setTarRetrieveServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>tarRetrieveServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.archive:service=TarRetriever"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMppsforwardServiceName"
+      setMethod="setMppsforwardServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>mppsForwardServiceName</name>
+      <type>javax.management.ObjectName</type>
+      <descriptors>
+         <value value="dcm4chee.web:service=MPPSForward"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getUserMgtUserRole"
+      setMethod="setUserMgtUserRole">
+      <description><![CDATA[User Rolename for User Management.
+      ]]></description>
+      <name>UserMgtUserRole</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="WebUser"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getUserMgtAdminRole"
+      setMethod="setUserMgtAdminRole">
+      <description><![CDATA[Admin Rolename for User Management.
+      ]]></description>
+      <name>UserMgtAdminRole</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="WebAdmin"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isManageUsers"
+      setMethod="setManageUsers">
+      <description><![CDATA[Manage users in the web application.
+      ]]></description>
+      <name>manageUsers</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isManageStudyPermissions"
+      setMethod="setManageStudyPermissions">
+      <description><![CDATA[Let the web users manage study permissions using the web interface.
+      ]]></description>
+      <name>manageStudyPermissions</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isUseStudyPermissions"
+      setMethod="setUseStudyPermissions">
+      <description><![CDATA[Apply the study permissions to the web application features.
+      ]]></description>
+      <name>useStudyPermissions</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getTooOldLimit"
+      setMethod="setTooOldLimit">
+      <description><![CDATA[The time limit it is possible to edit dicom objects in the folder.
+      <br>Can be specified in weeks (##w) or days (##d).
+      <br>If set to NEVER the feature will not be used.
+      ]]></description>
+      <name>tooOldLimit</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NEVER"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getIgnoreEditTimeLimitRolename"
+      setMethod="setIgnoreEditTimeLimitRolename">
+      <description><![CDATA[Hive Rolename which may ignore the configured edit time limit (tooOldLimit) for dicom objects.
+      ]]></description>
+      <name>ignoreEditTimeLimitRolename</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="IgnoreEditTimeLimit"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getRetentionTime"
+      setMethod="setRetentionTime">
+      <description><![CDATA[Retention time for automized deletion of studies in trash.
+      <br>Can be specified in weeks (##w) or days (##d).
+      <br>If set to NEVER the feature will not be used.
+      ]]></description>
+      <name>retentionTime</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NEVER"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getEmptyTrashInterval"
+      setMethod="setEmptyTrashInterval">
+      <description><![CDATA[Time interval for checking if object in the trash are older than the retention time and executing the automized deletion eventually.
+      <br>Can be specified in weeks (##w) or days (##d).
+      <br>If set to NEVER the feature will not be used.
+      ]]></description>
+      <name>emptyTrashInterval</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NEVER"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getZipEntryTemplate"
+      setMethod="setZipEntryTemplate">
+      <description><![CDATA[Path template for zip entries used by file export.<br />
+      	Format: filePath with template parameters: patID, patName, studyIuid, seriesIuid, sopIuid.<br />
+      	Template parameter must be enclosed with {}. A leading '#' means the hashcode of the value in hex.<br>
+      	e.g.: {patID}/{#studyIuid}/{#sopIuid} 
+      	Note: sopIuid is required!
+      ]]></description>
+      <name>ZipEntryTemplate</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="{#studyIuid}/{#seriesIuid}/{#sopIuid}"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getBufferSize"
+      setMethod="setBufferSize">
+      <description><![CDATA[Buffer size used by file export.<br />
+      	
+      ]]></description>
+      <name>BufferSize</name>
+      <type>int</type>
+      <descriptors>
+         <value value="8192"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isTrustPatientIdWithoutIssuer"
+      setMethod="setTrustPatientIdWithoutIssuer">
+      <description><![CDATA[Configure if match of issuer on a move to trash respects the null issuer.<br />
+      If false, the match evaluates to false and triggers an error, if at least one of the issuers is null.
+      ]]></description>
+      <name>trustPatientIdWithoutIssuer</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getModalityFilter"
+      setMethod="setModalityFilter">
+      <description><![CDATA[List of modalities that will be used for filtering<br/>
+      	when searching for Studies with unlinked PPS, without PPS or without worklist.<br/>
+      	Format: &lt;Modality&gt;[|&lt;Modality&gt[|..]]<br/>
+      	NONE is used for an empty list.
+      ]]></description>
+      <name>modalityFilter</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getSearchWarningThreshold"
+      setMethod="setSearchWarningThreshold">
+      <description>Threshold for the display of a warning depending on the number of studies that would be retrieved by the folder search. If the count exceeds this threshold a warning that the search may take long will be displayed and the user is provided with the option to cancel the search.</description>
+      <name>SearchWarningThreshold</name>
+      <type>int</type>
+      <descriptors>
+         <value value="1000"/>
+      </descriptors>
+   </attribute>
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+   
+   <operation impact="ACTION">
+      <description><![CDATA[ <dl><dt>Check the type of given SOP Class UID.<dt/>
+      			<dd>0...Image</dd>
+      			<dd>1...Structured Report</dd>
+      			<dd>2...Video</dd>
+      			<dd>3...Encapsulated Document</dd>
+      			<dd>4...Waveform</dd>
+      			<dd>5...Presentation State</dd>
+      			<dd>-1..Not classified</dd>
+      		]]> </description>
+      <name>checkCUID</name>
+      <parameter>
+        <description>SOP Class UID</description>
+        <name>sopClassUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Return a list of MIME types that are supported by RID service and viewer according 
+            configured RID MIME types.
+      		]]> </description>
+      <name>getRIDMimeTypesForCuid</name>
+      <parameter>
+        <description>SOP Class UID</description>
+        <name>sopClassUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get window size for given window name. Return an int[] with 0..width and 1..height</description>
+      <name>getWindowSize</name>
+      <parameter>
+        <description>Name of window</description>
+        <name>name</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>[I</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get List of modalities</description>
+      <name>getModalityList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get List of AET Types</description>
+      <name>getAETTypesList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get List of Station Names</description>
+      <name>getStationNameList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get List of Levels for 'Expand to' selection choices.</description>
+      <name>getAutoExpandLevelChoiceList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get List of Page sizes</description>
+      <name>getPagesizeList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get a map of teaching-file field id's to keyword catalogue id's</description>
+      <name>getTCKeywordCataloguesMap</name>
+      <return-type>java.util.Map</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get a map of teaching-file field id's to exclusive keyword catalogue id's</description>
+      <name>getTCKeywordCataloguesMapExclusive</name>
+      <return-type>java.util.Map</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get a map of teaching-file field id's to non-exclusive keyword catalogue id's</description>
+      <name>getTCKeywordCataloguesMapNonExclusive</name>
+      <return-type>java.util.Map</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get list of hidden attributes when training-mode is on or user doesn't has the permission to view restricted attributes</description>
+      <name>getTCRestrictedAttributesList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get list of matching teaching-file source AETs</description>
+      <name>getTCRestrictedSourceAETList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get list of ethnic group options</description>
+      <name>getTCEthnicGroupsAsList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[Get List of WebViewer names<br />
+      	Note: null means ANY and an empty list means NONE
+      ]]></description>
+      <name>getWebviewerNameList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[Get List of installed WebViewer names<br />
+      	Note: null indicates an error.
+      ]]></description>
+      <name>getInstalledWebViewerNameList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[Get Map of WebViewer Base URLs.<br />
+      	The key is the webviewer name and the value the Base URL.
+      ]]></description>
+      <name>getWebviewerBaseUrlMap</name>
+      <return-type>java.util.Map</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Update List of modalities by querying database</description>
+      <name>updateModalities</name>
+      <return-type>void</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Update List of Station Names by querying database</description>
+      <name>updateStationNames</name>
+      <return-type>void</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description>Synchronize the role table with the assigned dicom roles of the dicom context</description>
+      <name>updateDicomRoles</name>
+   </operation>
+   <operation impact="ACTION">
+      <description>Get List of filtered modalities</description>
+      <name>getModalityFilterList</name>
+      <return-type>java.util.List</return-type>
+   </operation>
+</mbean>

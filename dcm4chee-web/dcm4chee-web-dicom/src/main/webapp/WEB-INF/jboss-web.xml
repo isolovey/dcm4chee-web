@@ -1,0 +1,3 @@
+<jboss-web>
+    <security-domain>java:/jaas/dcm4chee-dicom</security-domain>
+</jboss-web>

@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN" "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd">
+
+<!--  Version $Revision:$ $Date:$ -->
+<mbean>
+      <description><![CDATA[<b>Content Edit Service for dcm4chee-web3</b>
+		]]> </description>
+
+    <descriptors>
+       <persistence persistPolicy="OnUpdate"/>
+       <persistence-manager value="org.jboss.mx.persistence.DelegatingPersistenceManager" />
+    </descriptors>
+
+    <class>org.dcm4chee.web.service.contentedit.ContentEditService</class>
+
+    <constructor>
+         <description>The default constructor</description>
+         <name>ContentEditService</name>
+    </constructor>
+
+   <attribute access="read-write"
+      getMethod="getUIDRoot"
+      setMethod="setUIDRoot">
+      <description>Root part of new generated UIDs.
+      </description>
+      <name>UIDRoot</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value='1.2.40.0.13.1.1' />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getRejectionNoteCode"
+      setMethod="setRejectionNoteCode">
+      <description>Concept Name Code used for Rejection Note Key Object Selection.
+      </description>
+      <name>RejectionNoteCode</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value='(113001, DCM, "Rejected for Quality Reasons")' />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="isProcessRejNote"
+      setMethod="setProcessRejNote">
+      <description>Enable/Disable sending Rejection Note.
+      </description>
+      <name>enableRejNote</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isUseIOCM"
+      setMethod="setUseIOCM">
+      <description><![CDATA[Enable IOCM for propagation of changes for Study, Series and Instance level.<br />
+      	If enabled, changes are sent via RejectionNote and changed Instances instead of private Attribute Modification SOP class.<br />
+		      	
+      ]]></description>
+      <name>UseIOCM</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getIocmForwardDelay"
+      setMethod="setIocmForwardDelay">
+      <description><![CDATA[Delay in milliseconds to send modified objects to IOCM archive.<br />
+      		This delay may assure that the rejection note is processed before the modified objects are sent.<br />
+      		(e.g. for move study to patient)
+      ]]></description>
+      <name>IocmForwardDelay</name>
+      <type>long</type>
+      <descriptors>
+         <value value="0" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getContributingEquipment"
+      setMethod="setContributingEquipment">
+      <description><![CDATA[ContributingEquipment used in Referenced Instance Sequence for IOCM. 
+      	Format:&lt;InstitutionName&gt;|&lt;StationName&gt;|&lt;Manufacturer&gt;
+      ]]></description>
+      <name>ContributingEquipment</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value='InstitutionName|StationName|Manufacturer' />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isProcessIAN"
+      setMethod="setProcessIAN">
+      <description>Enable/Disable sending Instance Availability Notification.
+      </description>
+      <name>enableIAN</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isSendIANonMppsLinked"
+      setMethod="setSendIANonMppsLinked">
+      <description>Enable/Disable sending Instance Availability Notification after linking MPPS with MWL.
+      </description>
+      <name>sendIANonMppsLinked</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isNotifyArchiveServicesAfterLinking"
+      setMethod="setNotifyArchiveServicesAfterLinking">
+      <description><![CDATA[Enable/Disable JMX notification of Archive services after linking MPPS with MWL.<br />
+      		Use <code>ArchiveIANScuServicename.notifyOtherServices</code> to send the notification.<br />
+      		Standard services which get notified: XDS-I, ExportManager, GPWLFeed and UPSFeed.
+      ]]></description>
+      <name>NotifyArchiveServicesAfterLinking</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getForwardModifiedToAETs"
+      setMethod="setForwardModifiedToAETs">
+      <description>List of AETs to forward modified objects to system that doesn't support Attribute Modification Notification.
+      		Use NONE to disable this feature. 
+      </description>
+      <name>ForwardModifiedToAETs</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isEnableForwardOnPatientUpdate"
+      setMethod="setEnableForwardOnPatientUpdate">
+      <description><![CDATA[Enable forwarding of instances if patient attributes are modified.<br />
+        If enabled, one instance (online) is sent to all AE's listed in <b>ForwardModifiedToAETs</b><br />
+      	You should enable this feature only if you have to update a system that does NOT support HL7 ADT update messages!
+      ]]></description>
+      <name>EnableForwardOnPatientUpdate</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="false" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getModifyingSystem"
+      setMethod="setModifyingSystem">
+      <description>Identification of the system which modifies attributes. Used in OriginalAttributesSequence.
+      </description>
+      <name>ModifyingSystem</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="DCM4CHEE" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getModifyReason"
+      setMethod="setModifyReason">
+      <description>Default Reason for attribute modifications. Used in OriginalAttributesSequence.
+      </description>
+      <name>ModifyReason</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="COERCE" />
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getCoerceConfigDir"
+      setMethod="setCoerceConfigDir">
+      <description><![CDATA[Directory where configuration files for attribute
+      coercion are located: if XSL stylesheet "mwl-cfindrsp2cstorerq.xsl" exists in this directory 
+      or in a sub-directory equal to the ScheduledStationAETitle, Serien and Study attributes will be updated 
+      with Request attributes from MWL item according these stylesheets.
+      A relative path name is resolved relative to
+      <i>archive-install-directory</i>/server/default/.]]>  
+      </description>
+      <name>CoerceConfigDirectory</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="conf/dcm4chee-ae"/>
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="isDcm14Stylesheet"
+      setMethod="setDcm14Stylesheet">
+      <description>Set true if the mwl-cfindrsp2cstorerq.xsl stylesheet use the dcm4che14 xml format.
+      </description>
+      <name>Dcm14Stylesheet</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getDcm2To14Tpl"
+      setMethod="setDcm2To14Tpl">
+      <description>Stylesheet to transform dcm4che2 formatted xml to dcm4che14 xml.
+      </description>
+      <name>Dcm2To14XSL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="resource:xsl/dcm2To14.xsl" />
+      </descriptors>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getDcm14To2Tpl"
+      setMethod="setDcm14To2Tpl">
+      <description>Stylesheet to transform dcm4che14 formatted xml to dcm4che2 xml.
+      </description>
+      <name>Dcm14To2XSL</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="resource:xsl/dcm14To2.xsl" />
+      </descriptors>
+   </attribute>
+   
+   <attribute access="read-write"
+      getMethod="getAddMwlAttrsToMppsXsl"
+      setMethod="setAddMwlAttrsToMppsXsl">
+      <description><![CDATA[ Stylesheet to add MWL attributes to MPPS attributes for 'MPPS Linked' notification.<br/>
+                This allow the use of additional MWL attributes to create ORM message in HL7SendV2 service. 
+                A relative path name is resolved relative to <i>archive-install-directory</i>/server/default/.<br/>
+                NONE..leave MPPS attributes unchanged. <br />
+                Use a leading '14|' identifier if the stylesheet is for dcm4che14 formatted xml.
+        ]]>
+      </description>
+      <name>AddMwlAttrsToMppsXsl</name>
+      <type>java.lang.String</type>
+      <descriptors>
+         <value value="NONE"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="isUpdateMwlStatus"
+      setMethod="setUpdateMwlStatus">
+      <description><![CDATA[ Enable update of MWL status after linking/unlinking MPPS to MWL. <br />
+                If enabled the MWL status is set to <i>COMPLETED</i> after linking and <i>SCHEDULED</i> after unlink! 
+        ]]>
+      </description>
+      <name>UpdateMwlStatus</name>
+      <type>boolean</type>
+      <descriptors>
+         <value value="true"/>
+      </descriptors>
+   </attribute>
+
+   <attribute access="read-write"
+      getMethod="getRejectionNoteServiceName"
+      setMethod="setRejectionNoteServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>RejectionNoteServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   
+   <attribute access="read-write"
+      getMethod="getIANScuServiceName"
+      setMethod="setIANScuServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>IANScuServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getMoveScuServiceName"
+      setMethod="setMoveScuServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>MoveScuServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write" 
+      getMethod="getTemplatesServiceName"
+      setMethod="setTemplatesServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>TemplatesServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getStoreScpServiceName"
+      setMethod="setStoreScpServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>StoreScpServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getAttrModificationScuServiceName"
+      setMethod="setAttrModificationScuServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>AttributesModificationScuServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getQRServiceName"
+      setMethod="setQRServiceName">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>QRServiceName</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+   <attribute access="read-write"
+      getMethod="getArchiveIANScuServicename"
+      setMethod="setArchiveIANScuServicename">
+      <description>Used internally. Do NOT modify.
+      </description>
+      <name>ArchiveIANScuServicename</name>
+      <type>javax.management.ObjectName</type>
+   </attribute>
+
+   &defaultAttributes;
+   
+   <!-- Operations -->
+   &defaultOperations;
+
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Deletes the instance with given SopInstanceUID.
+      		]]> </description>
+      <name>moveInstanceToTrash</name>
+      <parameter>
+        <description>SOP Instance UID</description>
+        <name>iuid</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>org.dcm4che2.data.DicomObject</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Deletes the instances with given primary keys.
+      		]]> </description>
+      <name>moveInstancesToTrash</name>
+      <parameter>
+        <description>Array of pk's</description>
+        <name>pks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Deletes the series with given SeriesInstanceUID.
+      		]]> </description>
+      <name>moveSeriesToTrash</name>
+      <parameter>
+        <description>Series Instance UID</description>
+        <name>iuid</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>org.dcm4che2.data.DicomObject</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Delete series with given list of primary keys.
+      		]]> </description>
+      <name>moveSeriessToTrash</name>
+      <parameter>
+        <description>Array of pk's</description>
+        <name>pks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Delete MPPS (and referenced Series) with given list of primary keys.
+      		]]> </description>
+      <name>moveSeriesOfPpsToTrash</name>
+      <parameter>
+        <description>Array of pk's</description>
+        <name>pks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Delete MPPS with given list of primary keys (remove PPS info from series).
+      		]]> </description>
+      <name>deletePps</name>
+      <parameter>
+        <description>Array of pk's</description>
+        <name>pks</name>
+        <type>[J</type>
+      </parameter>
+      <return-type>java.util.List</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Deletes the study with given StudyInstanceUID.
+      		]]> </description>
+      <name>moveStudyToTrash</name>
+      <parameter>
+        <description>Study Instance UID</description>
+        <name>iuid</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>org.dcm4che2.data.DicomObject</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Delete studies with given list of primary keys.
+      		]]> </description>
+      <name>moveStudiesToTrash</name>
+      <parameter>
+        <description>Array of pk's</description>
+        <name>pks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Delete study with given primary key.
+      		]]> </description>
+      <name>moveStudyPkToTrash</name>
+      <parameter>
+        <description>Study pk</description>
+        <name>pk</name>
+        <type>long</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Deletes the Patient with given Patient Id and Issuer.
+      		]]> </description>
+      <name>movePatientToTrash</name>
+      <parameter>
+        <description>Patient ID</description>
+        <name>pid</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Issuer of Patient ID</description>
+        <name>issuer</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Delete patients with given list of primary keys.
+      		]]> </description>
+      <name>movePatientsToTrash</name>
+      <parameter>
+        <description>Array of pk's</description>
+        <name>pks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Delete patient with given primary key.
+      		]]> </description>
+      <name>movePatientToTrash</name>
+      <parameter>
+        <description>Patient pk</description>
+        <name>pk</name>
+        <type>long</type>
+      </parameter>
+      <parameter>
+        <name>trustPatientIdWithoutIssuer</name>
+        <type>boolean</type>
+      </parameter>
+      <return-type>[Lorg.dcm4che2.data.DicomObject;</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Remove all entries from trash.
+      		]]> </description>
+      <name>emptyTrash</name>
+      <return-type>void</return-type>
+   </operation>
+   
+   <operation impact="ACTION">
+      <description><![CDATA[ Move instances with given pk's to series with given pk.
+      		]]> </description>
+      <name>moveInstancesToSeries</name>
+      <parameter>
+        <description>Primary keys of Instances</description>
+        <name>instPks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <description>Primary key of Series</description>
+        <name>seriesPk</name>
+        <type>long</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Move instance with given SopInstanceUID to series with given series IUID.
+      		]]> </description>
+      <name>moveInstanceToSeries</name>
+      <parameter>
+        <description>SOP Instance UID</description>
+        <name>sopIUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Series Instance UID</description>
+        <name>seriesIUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Move series with given pk's to study with given pk.
+      		]]> </description>
+      <name>moveSeriesToStudy</name>
+      <parameter>
+        <description>Primary keys of series</description>
+        <name>seriesPks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <description>Primary key of Study</description>
+        <name>studyPk</name>
+        <type>long</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Move series with given Series InstanceUID to study with given Study IUID.
+      		]]> </description>
+      <name>moveSeriesToStudy</name>
+      <parameter>
+        <description>Series Instance UID</description>
+        <name>seriesIUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Study Instance UID</description>
+        <name>studyIUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Move studies with given pk's to Patient with given pk.
+      		]]> </description>
+      <name>moveStudiesToPatient</name>
+      <parameter>
+        <description>Primary keys of Studies</description>
+        <name>studyPks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <description>Primary key of Patient</description>
+        <name>patPk</name>
+        <type>long</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Move studies with given Study InstanceUID to Patient with given PatientID/Issuer.
+      		]]> </description>
+      <name>moveStudyToPatient</name>
+      <parameter>
+        <description>Study Instance UID</description>
+        <name>studyIUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Patient ID</description>
+        <name>patId</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Issuer of Patient ID</description>
+        <name>issuer</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Link a MPPS to an MWL item.
+      		]]> </description>
+      <name>linkMppsToMwl</name>
+      <parameter>
+        <description>MPPS Instance UID</description>
+        <name>mppsIUID</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Requested Procedure ID</description>
+        <name>rpId</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Scheduled Procedure Step ID</description>
+        <name>spsId</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Name of Modifying System</description>
+        <name>modifyingSystem</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Reason for modifying</description>
+        <name>reason</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Link a MPPS to an MWL item.
+      		]]> </description>
+      <name>linkMppsToMwl</name>
+      <parameter>
+        <description>MPPS primary keys</description>
+        <name>mppsPks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <description>MWL primary key</description>
+        <name>mwlPk</name>
+        <type>long</type>
+      </parameter>
+      <parameter>
+        <description>Name of Modifying System</description>
+        <name>modifyingSystem</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Reason for modifying</description>
+        <name>reason</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>org.dcm4chee.web.dao.vo.MppsToMwlLinkResult</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Link a MPPS to an MWL item.
+      		]]> </description>
+      <name>linkMppsToMwl</name>
+      <parameter>
+        <description>MPPS primary keys</description>
+        <name>mppsPks</name>
+        <type>[J</type>
+      </parameter>
+      <parameter>
+        <description>DicomObject with MWL Attributes</description>
+        <name>mwlAttrs</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description>Patient Entity</description>
+        <name>pat</name>
+        <type>org.dcm4chee.archive.entity.Patient</type>
+      </parameter>
+      <parameter>
+        <description>Name of Modifying System</description>
+        <name>modifyingSystem</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Reason for modifying</description>
+        <name>reason</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>org.dcm4chee.web.dao.vo.MppsToMwlLinkResult</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Unlink a MPPS.
+      		]]> </description>
+      <name>unlinkMpps</name>
+      <parameter>
+        <description>MPPS primary key</description>
+        <name>mppsPk</name>
+        <type>long</type>
+      </parameter>
+      <return-type>boolean</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Unlink a list of MPPS. (only for internal use)
+      		]]> </description>
+      <name>unlinkMppsByPks</name>
+      <parameter>
+        <description>MPPS primary keys</description>
+        <name>mppsPks</name>
+        <type>[J</type>
+      </parameter>
+      <return-type>boolean</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Select or create patient for given patient attributes.
+      		]]> </description>
+      <name>selectPatient</name>
+      <parameter>
+        <description>Patient Attributes</description>
+        <name>patAttrs</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <return-type>java.util.List</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description><![CDATA[ Create a new Study.
+      		]]> </description>
+      <name>createStudy</name>
+      <parameter>
+        <description>Study Attributes</description>
+        <name>studyAttrs</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description>Patient primary key</description>
+        <name>patPk</name>
+        <type>long</type>
+      </parameter>
+      <return-type>org.dcm4chee.archive.entity.Study</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Create a new Series.
+      		]]> </description>
+      <name>createSeries</name>
+      <parameter>
+        <description>Series Attributes</description>
+        <name>seriesAttrs</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description>Study primary key</description>
+        <name>studyPk</name>
+        <type>long</type>
+      </parameter>
+      <return-type>org.dcm4chee.archive.entity.Series</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Remove foreign PPS Info from series of study given by studyPk.<br />
+      		Series with foreign PPS Infos have a Performed Procedure Step Sequence item but no MPPS referenced!<br />
+      		Return number of updated series.
+      		]]> </description>
+      <name>removeForeignPpsInfo</name>
+      <parameter>
+        <description>Primary key of Study</description>
+        <name>studyPk</name>
+        <type>long</type>
+      </parameter>
+      <return-type>int</return-type>
+   </operation>
+   <operation impact="ACTION">
+      <description><![CDATA[ Create Audit log and send 'Attributes Modification Notification' C-STORE request after Edit DICOM attributes.
+      		]]> </description>
+      <name>doAfterDicomEdit</name>
+      <parameter>
+        <description>Patient ID</description>
+        <name>patId</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Patient Name</description>
+        <name>patName</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <parameter>
+        <description>Study Instance UIDs</description>
+        <name>studyIUIDs</name>
+        <type>[Ljava.lang.String;</type>
+      </parameter>
+      <parameter>
+        <description>Patient primary key</description>
+        <name>patPk</name>
+        <type>org.dcm4che2.data.DicomObject</type>
+      </parameter>
+      <parameter>
+        <description>QueryRetrieve Level (PATIENT, STUDY, SERIES, INSTANCE or MPPS)</description>
+        <name>qrLevel</name>
+        <type>java.lang.String</type>
+      </parameter>
+      <return-type>void</return-type>
+   </operation>
+
+   <operation impact="ACTION">
+      <description>Reload AttributeFilter.</description>
+      <name>reloadAttributeFilter</name>
+      <return-type>void</return-type>
+   </operation>
+</mbean>

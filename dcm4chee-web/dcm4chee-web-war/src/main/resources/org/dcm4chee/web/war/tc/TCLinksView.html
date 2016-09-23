@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+        <div wicket:id="remove-link-dialog"/>
+    	<div id="link-search" wicket:id="link-search" class="ui-border-box" style="float:left;width:30%;height:100%;margin-right:10px;padding:5px;overflow-x:hidden;overflow-y:auto;">
+			<img wicket:id="link-search-info-img"/>
+			<div wicket:id="link-search-relationship-label" style="margin: 5px 2px 3px;"/>
+			<select wicket:id="link-search-relationship-select" class="ui-border-box" style="display:block; width:100%;"/>
+			<div wicket:id="link-search-case-label" style="margin:10px 2px 3px;"/>
+			<input wicket:id="link-search-case-input" class="ui-textfield ui-border-box" style="display:block;width:100%;margin:0 0 3px;font-style:italic;" />
+			<ul wicket:id="link-search-case-results" class="ui-widget-content- ui-border-box" style="display:block; width: 100%; height:140px; overflow-x:hidden; overflow-y:auto;margin:0;">
+				<li wicket:id="link-search-case-results-list">
+					<a wicket:id="link-search-case-results-list-item">
+						<div wicket:id="link-search-case-results-item-text" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"/>
+					</a>
+				</li>
+			</ul>
+			<div wicket:id="link-search-comment-label" style="margin:10px 2px 3px;"/>
+			<textarea wicket:id="link-search-comment-area" class="ui-textarea ui-border-box" style="display:block;width:100%;"></textarea>
+			<div style="margin-top: 20px; text-align: center;">
+				<button wicket:id="link-link-btn" class="button">
+					<span wicket:id="link-link-btn-text" />
+				</button>
+			</div>
+    	</div>
+    	<div wicket:id="links" style="height:100%;overflow-y:auto;">
+    		<div wicket:id="link" class="document-item" style="position:relative;min-height:40px;margin:10px 0 20px;overflow:hidden;">
+    			<div style="margin-bottom:5px;">
+    				<span wicket:id="link-relationship" class="ui-widget-content ui-corner-bottom link-relationship"
+    					style="display:inline-block; margin-top:-1px;padding:0 10px;"/>
+     			</div>
+     			<img wicket:id="link-image" class="ui-corner-all" style="float:left; width:64px; margin:0 5px;"/>
+    			<a wicket:id="link-title-link" style="text-decoration:none;">
+    				<span wicket:id="link-title" style="vertical-align:middle;font-weight:bold;font-size:115%;"/>
+    				<img wicket:id="link-follow-image" style="width:16px;height:16px;vertical-align:middle"/>
+    			</a>
+                <div wicket:id="link-abstract" style="margin-left:74px;"/>
+                <div wicket:id="link-comment" style="margin-left:74px; font-style:italic;max-height:50px;overflow-y:auto;word-wrap:break-word;"/>
+                <div wicket:id="link-actions" style="display:none;position:absolute;right:10px;top:10px;">
+		    		<a wicket:id="link-remove-btn" style="display:inline-block">
+		            	<img wicket:id="link-remove-image" />
+		            </a>
+	            </div>
+    		</div>
+    	</div>
+	</wicket:panel>
+</body>
+</html>

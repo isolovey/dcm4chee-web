@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+    	<form wicket:id="date-input-dialog-outer-form">
+    		<div wicket:id="date-input-dialog"/>
+    	</form>
+        <div class="search-area-header ui-widget-header">
+            <wicket:message key="tc.search.header.text"/>
+            <span class="search-toggle-area">
+	            <a wicket:id="searchToggle" class="search-toggle">
+	               <img wicket:id="searchToggleImg"/>
+	            </a>
+            </span>
+        </div>
+        <form wicket:id="searchForm" class="search-form">
+			<div class="keyword-area">
+				<wicket:message key="tc.keyword.text" />
+				<div wicket:id="keywordInput" style="display: inline-block; vertical-align:middle" />
+				<button wicket:id="doSearchBtn" type="submit" class="button">
+					<img wicket:id="doSearchImg" alt="Search" /> <span
+						wicket:id="doSearchText" />
+				</button>
+			</div>
+			<div class="advanced-options-toggle-area">
+			    <a wicket:id="advancedOptionsToggle" style="text-decoration:none">
+                   <img wicket:id="advancedOptionsToggleImg"/>
+                   <span wicket:id="advancedOptionsToggleText"/>
+                </a>
+			</div>
+			<div wicket:id="advancedOptions" class="advanced-options-area">
+			     <table><tr>
+			        <td valign="top">
+			     	<div class="code-table-area">
+						<table class="code-table">
+							<tr>
+								<td style="text-align:right">
+								    <wicket:message key="tc.anatomy.text" />
+								</td>
+								<td style="text-align:left">
+								    <div wicket:id="anatomyInput"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">
+								    <wicket:message key="tc.pathology.text" />
+								</td>
+								<td  style="text-align:left">
+								    <div wicket:id="pathologyInput"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">
+								    <wicket:message key="tc.finding.text" />
+								</td>
+								<td style="text-align:left">
+								    <div wicket:id="findingInput"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">
+								    <wicket:message key="tc.diagnosis.text" />
+								</td>
+								<td style="text-align:left">
+								    <div wicket:id="diagnosisInput"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">
+								    <wicket:message key="tc.diffdiagnosis.text" />
+								</td>
+								<td style="text-align:left">
+								    <div wicket:id="diffDiagnosisInput" />
+								</td>
+							</tr>
+						</table>
+					</div>
+					</td>
+					<td valign="top">
+					<div class="choice-table-area">
+	                    <table class="choice-table">
+	                        <tr>
+	                            <td style="text-align:right">
+	                               <wicket:message key="tc.modality.text" />
+	                            </td>
+	                            <td style="text-align:left">
+	                               <select wicket:id="modalityChoice" class="ui-combobox"/>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td style="text-align:right">
+	                               <wicket:message key="tc.patient.sex.text" />
+	                            </td>
+	                            <td style="text-align:left">
+	                               <select wicket:id="patientSexChoice" class="ui-combobox"/>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td style="text-align:right">
+	                               <wicket:message key="tc.category.text" />
+	                            </td>
+	                            <td style="text-align:left">
+	                               <select wicket:id="categoryChoice" class="ui-combobox"/>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td style="text-align:right">
+	                               <wicket:message key="tc.level.text" />
+	                            </td>
+	                            <td  style="text-align:left">
+	                               <select wicket:id="levelChoice" class="ui-combobox"/>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td style="text-align:right">
+	                               <wicket:message key="tc.diagnosis.confirmed.text" />
+	                            </td>
+	                            <td style="text-align:left">
+	                               <select wicket:id="diagnosisConfirmedChoice" class="ui-combobox"/>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td style="text-align:right">
+	                               <wicket:message key="tc.content.date.text" />
+	                            </td>
+	                            <td style="text-align:left">
+	                               <select wicket:id="dateChoice" class="ui-combobox"/>
+	                            </td>
+	                        </tr>
+	                    </table>
+	                </div>
+	                </td>
+	                <td valign="top">
+	                <div class="text-table-area" style="margin-top:2px;">
+                        <div class="free-text-area"> 
+                            <wicket:message key="tc.search.freetext.text"/> 
+                            <input wicket:id="textText" type="text" class="ui-textfield" 
+                            	style="margin-left:5px; margin-bottom:1.2em; text-align:left; width:18em"/> 
+                        </div>
+                        <table class="text-table">
+                            <wicket:container wicket:id="optionGroup">
+                                <tr>
+                                    <td style="text-align:left">
+                                        <input wicket:id="historyOption" type="radio"/>
+                                        <wicket:message key="tc.history.text" />
+                                    </td>
+                                    <td style="text-align:left">
+                                        <input wicket:id="abstractOption" type="radio" />
+                                        <wicket:message key="tc.search.abstract.text"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">
+                                        <input wicket:id="authorNameOption" type="radio"/>
+                                        <wicket:message key="tc.search.author.name.text"/>
+                                    </td>
+                                    <td style="text-align:left">
+                                        <input wicket:id="patientSpeciesOption" type="radio"/>
+                                        <wicket:message key="tc.search.patient.species.text"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">
+                                        <input wicket:id="authorContactOption" type="radio"/>
+                                        <wicket:message key="tc.search.author.contact.text"/>
+                                    </td>
+                                    <td style="text-align:left">
+                                        <input wicket:id="discussionOption" type="radio"/>
+                                        <wicket:message key="tc.discussion.text"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">
+                                        <input wicket:id="authorOrganisationOption" type="radio"/>
+                                        <wicket:message key="tc.search.author.affiliation.text"/>
+                                    </td>
+                                    <td style="text-align:left">
+                                        <input wicket:id="titleOption" type="radio"/>
+                                        <wicket:message key="tc.search.title.text"/>
+                                    </td>
+                                </tr>
+                            </wicket:container>
+                        </table>
+                    </div>
+                    </td>
+                    <td>
+                    <div class="reset-search-area">
+                        <button wicket:id="resetSearchBtn" type="button" class="button">
+                            <img wicket:id="resetSearchImg" alt="Search"/>
+                            <span wicket:id="resetSearchText"/>
+                        </button>
+                    </div>
+                    </td>
+                </tr></table>
+			</div>
+		</form>
+	</wicket:panel> 
+</body>
+<wicket:fragment wicket:id="date-input-dialog-content">
+	<form wicket:id="date-input-dialog-inner-form">
+		<div style="text-align:center; margin:10px">
+			<div style="margin-top:20px;margin-right:30px;">
+				<span wicket:id="date-input-dialog-from-label" style="display:inline-block; width:35px; text-align:left;"/>
+				<span class="ui-combobox-base">
+					<input wicket:id="date-input-dialog-from-input" readonly="readonly" 
+						class="ui-combobox-input-readonly ui-textfield"></input>
+				</span>
+			</div>
+			<div style="margin-top:4px;margin-right:30px;">
+				<span wicket:id="date-input-dialog-until-label" style="display:inline-block; width:35px; text-align:left;"/>
+				<span class="ui-combobox-base">
+					<input wicket:id="date-input-dialog-until-input" readonly="readonly" 
+						class="ui-combobox-input-readonly ui-textfield"></input>
+				</span>
+			</div>
+			<div style="text-align:center; margin-top:20px;">
+				<button wicket:id="date-input-dialog-ok-btn" type="submit" class="button">
+					<span wicket:id="date-input-dialog-ok-btn-text"/>
+				</button>
+			</div>
+		</div>
+	</form>
+</wicket:fragment>
+</html>

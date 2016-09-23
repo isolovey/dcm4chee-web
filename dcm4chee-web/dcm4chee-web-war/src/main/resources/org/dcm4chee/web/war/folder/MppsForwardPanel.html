@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/2002/08/xhtml/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<wicket:panel>
+			<div class="msgWindow">
+				<div class="edit-title">
+					<span wicket:id="title">Edit DICOM object</span>
+				</div>
+				<p>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="id.label" />
+						<span class="edit-value" wicket:id="id" />
+					</div>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="description.label" />
+						<span class="edit-value" wicket:id="description" />
+					</div>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="accessionNumber.label" />
+						<span class="edit-value" wicket:id="accessionNumber" />
+					</div>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="spsId.label" />
+						<span class="edit-value" wicket:id="spsId" />
+					</div>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="modality.label" />
+						<span class="edit-value" wicket:id="modality" />
+					</div>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="stationAET.label" />
+						<span class="edit-value" wicket:id="stationAET" />
+					</div>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="stationName.label" />
+						<span class="edit-value" wicket:id="stationName" />
+					</div>
+					<div class="edit-table-row">
+						<span class="edit-desc" wicket:id="status.label" />
+						<span class="edit-value" wicket:id="status" />
+					</div>
+				</p>
+				<form style="clear: both" wicket:id="form">
+					<p>
+						<div wicket:id="destinationAETsLabel">Destination AET: </div>
+						<select wicket:id="destinationAETs">
+				        </select>
+					</p>
+			        <p>
+						<div class="export-result">
+							<div wicket:id="forwardResultLabel">Export Results</div>
+							<textarea name="forwardResult" wicket:id="forwardResult" 
+								rows="10" cols="60" readonly>[ExportResult]</textarea>
+						</div>
+				  		<input type="submit" wicket:id="forward" />
+				  		<input type="submit" wicket:id="close" />
+	  				</p>
+			  	</form>
+	  		</div>
+		</wicket:panel>
+	</body>
+</html>

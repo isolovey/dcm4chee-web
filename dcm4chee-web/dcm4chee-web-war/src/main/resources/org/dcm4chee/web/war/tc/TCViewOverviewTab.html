@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+</head>
+<body>
+    <wicket:panel>
+        <div id="tc-view-overview-container-left">
+            <div wicket:id="tc-view-overview-title-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-title-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-left-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-left-column">
+                    <input type="text" wicket:id="tc-view-overview-title-text" style="width:98%" class="ui-textfield"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-abstract-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-abstract-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-left-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-left-column">
+	                <textarea id="tc-view-overview-abstract-area" wicket:id="tc-view-overview-abstract-area" style="width:98%" class="ui-textarea">
+	                </textarea>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-url-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-url-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-left-column">
+                	<a wicket:id="tc-view-url-link" target="_blank" style="text-decoration:none; font-weight:normal; color:blue;">
+    					<span wicket:id="tc-view-url-link-title"/>
+    					<img wicket:id="tc-view-url-link-follow-image" style="width:12px;height:12px"/>
+    				</a>
+                </div>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-left-column">
+                    <textarea wicket:id="tc-view-overview-url-text" style="width:98%" class="ui-textarea">
+                    </textarea>
+                </div>
+            </div>
+            <div class="tc-separator-horz"/>
+            <div wicket:id="tc-view-overview-authorname-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-authorname-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-left-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-left-column">
+                    <input type="text" wicket:id="tc-view-overview-authorname-text" style="width:98%" class="ui-textfield"/>
+                </div>
+            </div> 
+            <div wicket:id="tc-view-overview-authoraffiliation-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-authoraffiliation-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-left-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-left-column">
+                    <input type="text" wicket:id="tc-view-overview-authoraffiliation-text" style="width:98%" class="ui-textfield"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-authorcontact-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-authorcontact-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-left-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-left-column">
+                    <textarea wicket:id="tc-view-overview-authorcontact-area" style="width:98%" class="ui-textarea">
+                    </textarea>                
+                </div>
+            </div>
+        </div>
+        <div id="tc-view-overview-container-separator" class="tc-separator-vert"/>
+        <div id="tc-view-overview-container-right">
+            <div wicket:id="tc-view-overview-keyword-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-keyword-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <textarea wicket:id="tc-view-overview-keyword-area" style="width:98%" class="ui-textarea">
+                    </textarea>
+                    <div wicket:id="tc-view-overview-keyword-input-container">
+                        <div wicket:id="tc-view-overview-keyword-input-view">
+                            <a wicket:id="tc-view-overview-keyword-input-add" class="tc-view-overview-keyword-input-btn">
+                                <img wicket:id="tc-view-overview-keyword-input-add-img"/>
+                            </a>
+                            <a wicket:id="tc-view-overview-keyword-input-remove" class="tc-view-overview-keyword-input-btn">
+                                <img wicket:id="tc-view-overview-keyword-input-remove-img"/>
+                            </a>
+                            <div wicket:id="tc-view-overview-keyword-input" style="margin-right:24px"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-anatomy-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-anatomy-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-anatomy-value-label" style="width:98%" class="ui-textfield"/>
+                    <div wicket:id="tc-view-overview-anatomy-input" style="width:98%"/>
+                </div>
+            </div> 
+            <div wicket:id="tc-view-overview-pathology-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-pathology-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-pathology-value-label" style="width:98%" class="ui-textfield"/>
+                    <div wicket:id="tc-view-overview-pathology-input" style="width:98%"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-finding-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-finding-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-finding-value-label" style="width:98%" class="ui-textfield"/>
+                    <div wicket:id="tc-view-overview-finding-input" style="width:98%"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-diffdiag-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-diffdiag-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-diffdiag-value-label" style="width:98%" class="ui-textfield"/>
+                    <div wicket:id="tc-view-overview-diffdiag-input" style="width:98%"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-diag-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-diag-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-diag-value-label" style="width:98%" class="ui-textfield"/>
+                    <div wicket:id="tc-view-overview-diag-input" style="width:98%"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-diagconfirmed-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-diagconfirmed-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input wicket:id="tc-view-overview-diagconfirmed-input" type="checkbox" style="width:98%"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-category-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-category-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-category-value-label" style="width:98%" class="ui-textfield"/>
+                    <div class="ui-widget">
+                    	<select wicket:id="tc-view-overview-category-select" style="width:98%" class="ui-combobox"/>
+                	</div>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-level-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-level-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-level-value-label" style="width:98%" class="ui-textfield"/>
+                    <div class="ui-widget">
+                    	<select wicket:id="tc-view-overview-level-select" style="width:98%" class="ui-combobox"/>
+                	</div>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-patientsex-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-patientsex-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-patientsex-value-label" style="width:98%" class="ui-textfield"/>
+                    <div class="ui-widget">
+                    	<select wicket:id="tc-view-overview-patientsex-select" style="width:98%" class="ui-combobox"/>
+                	</div>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-patientage-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-patientage-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-patientage-value-label" style="width:98%" class="ui-textfield"/>
+                  	<input type="text" wicket:id="tc-view-overview-patientage-years-input" class="ui-spinner-year"/>
+                	<input type="text" wicket:id="tc-view-overview-patientage-months-input" class="ui-spinner-month"/>
+                </div>
+            </div>  
+            <div wicket:id="tc-view-overview-patientrace-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-patientrace-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-patientrace-value-label" style="width:98%" class="ui-textfield"/>
+                    <div class="ui-widget">
+                    	<select wicket:id="tc-view-overview-patientrace-select" style="width:98%" class="ui-combobox"/>
+                	</div>
+                </div>
+            </div> 
+            <div wicket:id="tc-view-overview-modalities-row"  class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-modalities-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-modalities-text" style="width:98%" class="ui-textfield"/>
+                </div>
+            </div>
+            <div wicket:id="tc-view-overview-imagecount-row" class="tc-view-overview-row">
+                <div wicket:id="tc-view-overview-imagecount-label" 
+                	class="tc-view-overview-row-key tc-view-overview-row-key-right-column"/>
+                <div class="tc-view-overview-row-value tc-view-overview-row-value-right-column">
+                    <input type="text" wicket:id="tc-view-overview-imagecount-value-label" style="width:98%" class="ui-textfield"/>
+                </div>
+            </div>
+        </div>          
+    </wicket:panel> 
+</body>
+</html>
